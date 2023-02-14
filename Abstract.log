@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  14 FEB 2023 19:13
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  15 FEB 2023 03:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -328,40 +328,36 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 9.85672pt on input line 49.
 Excluding 'comment' comment.
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+File: Method.pdf Graphic file (type pdf)
+<Method.pdf>
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.91403pt on input line 106.
+(Font)              scaled to size 5.91403pt on input line 128.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.92836pt on input line 106.
+(Font)              scaled to size 4.92836pt on input line 128.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 107.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 133.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 107.
+(Font)              scaled to size 8.64899pt on input line 133.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 107.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 133.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.87105pt on input line 107.
-
-LaTeX Warning: Reference `fig:agents' on page 1 undefined on input line 107.
-
-
-Overfull \hbox (33.2803pt too wide) detected at line 118
-[]
- []
-
+(Font)              scaled to size 8.87105pt on input line 133.
 [1
 
 
 ]
+File: GliaNetworks.pdf Graphic file (type pdf)
+<GliaNetworks.pdf>
 
-LaTeX Warning: Reference `fig:sig' on page 2 undefined on input line 153.
+LaTeX Warning: Reference `fig:syna' on page 2 undefined on input line 178.
 
 
-LaTeX Warning: Reference `fig:syna' on page 2 undefined on input line 177.
+LaTeX Warning: Reference `fig:span' on page 2 undefined on input line 178.
 
 
-LaTeX Warning: Reference `fig:span' on page 2 undefined on input line 177.
+Underfull \hbox (badness 1107) in paragraph at lines 197--198
+[]\JY1/mc/m/n/9 野村靖幸\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 北海道大学\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 神経免疫相関とくにニ
+ []
 
 [2] (./Abstract.aux)
 
@@ -369,12 +365,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4166 strings out of 478724
- 65647 string characters out of 5858391
- 395439 words of memory out of 5000000
- 22553 multiletter control sequences out of 15000+600000
- 480388 words of font info for 74 fonts, out of 8000000 for 9000
+ 4179 strings out of 478724
+ 65915 string characters out of 5858391
+ 388452 words of memory out of 5000000
+ 22561 multiletter control sequences out of 15000+600000
+ 480082 words of font info for 73 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 70i,10n,76p,267b,327s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 70i,10n,76p,267b,323s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (2 pages, 14380 bytes).
+Output written on Abstract.dvi (2 pages, 14340 bytes).
