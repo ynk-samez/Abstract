@@ -1,0 +1,240 @@
+% !TEX root = main.tex
+% 電気電子工学コース卒業研究抄録 LaTeX style file
+%						ver 1.0, 2005/2/8, by hkob
+%						ver 2.0, 2016/1/15, by hkob
+%						ver 3.0, 2016/2/16, by hkob (主文の強調機能)
+%	\usepackage{eshouroku} として追加する
+%
+
+\usepackage[a4paper,twocolumn,height=252mm,top=20mm,textwidth=170mm]{geometry}
+\columnsep 1cm
+
+\pagestyle{empty}%ページ数の非表示
+
+\newif\ifboldmain
+\newif\ifuseNum\useNumfalse
+
+% 主文を記述
+\newcommand{\shubun}[1]{%
+\ifboldmain%
+\textbf{#1}%
+\else%
+#1%
+\fi%
+}
+
+%講演番号を設定する
+\newcommand{\講演番号}[1]{%
+ \useNumtrue
+ \global\def\Vnum{#1}
+ \markright{\Vnum-\thepage}
+}
+% 日本語タイトル
+\newcommand{\日本語タイトル}[2]{%
+  \begin{center}
+  {#1 %
+   \ifuseNum
+    \shortstack{\Vnum　#2}%
+   \else
+    \shortstack{#2}%
+   \fi
+  }\\[1mm]%
+}%
+
+% 英語タイトル
+\newcommand{\英語タイトル}[2]{%
+ {#1%
+  \shortstack{#2}%
+ }\\%
+}
+
+% 記号の設定
+\def\numToKigou#1{%
+ \ifcase #1\relax %
+  \or \dagger \or \ddagger \or \symbol{&237} \else ???\fi}
+
+% 筆者
+\newcommand{\筆者}[1]{%
+ {%
+  #1%
+ }
+ \\
+ %
+}
+
+% 筆者 (1 名)
+\newcommand{\筆者一名}[2]{%
+ \筆者{%
+  \null \hfil %
+   #1　#2 \hfil \null%
+ }%
+}
+
+% 筆者 (2 名)
+\newcommand{\筆者二名}[4]{%
+ \筆者{%
+  \null \hfil %
+   #1　#2 \hfil%
+   #3　#4 \hfil \null%
+ }%
+}
+
+% 筆者 (3 名)
+\newcommand{\筆者三名}[6]{%
+ \筆者{%
+  \null \hfil%
+   #1　#2 \hfil%
+   #3　#4 \hfil%
+   #5　#6 \hfil \null%
+ }%
+}
+
+% 筆者 (4 名)
+\newcommand{\筆者四名}[8]{%
+ \筆者{%
+  \null \hfil%
+   #1　#2 \hfil%
+   #3　#4 \hfil%
+   #5　#6 \hfil%
+   #7　#8 \hfil \null%
+ }%
+}
+
+% 指導教員 (1 名)
+\newcommand{\指導教員一名}[1]{%
+ {
+  \hfill 指導教員　#1
+ }%
+ \end{center}
+}
+
+% 指導教員 (2 名)
+\newcommand{\指導教員二名}[2]{%
+ \指導教員一名{%
+  #1　#2
+ }
+ \end{center}
+}
+
+% 指導教員 (3 名)
+\newcommand{\指導教員三名}[3]{%
+ \指導教員一名{%
+  #1　#2　#3
+ }
+ \end{center}
+}
+
+\newcommand{\指導教員なし}{%
+ \end{center}
+}
+
+% section の文字の大きさを large にし，前後の幅を少なめに変更
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+   {.25\Cvs \@plus.25\Cdp \@minus.2\Cdp}%
+   {.25\Cvs \@plus.25\Cdp}%
+   {\reset@font\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+   {.15\Cvs \@plus.15\Cdp \@minus.2\Cdp}%
+   {.15\Cvs \@plus.15\Cdp}%
+   {\reset@font\large\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+   {.05\Cvs \@plus.05\Cdp \@minus.2\Cdp}%
+   {.05\Cvs \@plus.05\Cdp}%
+   {\reset@font\large\bfseries}}
+
+% section の数字は最後に . が付く
+\renewcommand{\thesection}{\@arabic\c@section.}
+\renewcommand{\thesubsection}{\thesection\@arabic\c@subsection}
+\renewcommand{\thesubsubsection}{%
+   \thesubsection.\@arabic\c@subsubsection}
+
+
+\newcommand{\ignore}[1]{}
+\ignore{
+% 参考文献のタイトルの変更
+%	jarticle.cls から抜粋し，refname を文献とし，中央揃えに変更
+\renewcommand{\refname}{参考文献}
+\renewenvironment{thebibliography}[1]
+{%
+  \def\subsection{\@startsection{subsection}{2}{\z@}
+  {.0001\Cvs \@plus1mm \@minus .5mm}
+  {.15\Cvs \@plus1mm}{\centering\large\bfseries}}
+  \subsection*{\refname\@mkboth{\refname}{\refname}}%
+   \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+}
+
+\def\maru#1{{\ooalign{\hfil %#1 の代わりに以下を追加
+  \ifnum#1>999 \raise.330ex\hbox{\resizebox{.40\width}{.55\height}{#1}}\else%
+  \ifnum#1>99 \raise.290ex\hbox{\resizebox{.52\width}{.60\height}{#1}}\else%
+  \ifnum#1>9 \raise.170ex\hbox{\resizebox{.75\width}{.75\height}{#1}}\else%
+  #1%
+  \fi\fi\fi%
+\/\hfil\crcr%
+\raise.167ex\hbox{\mathhexbox20D}}}}
+
+\def\mydash{---------}
+\def\thline{\noalign{\hrule height 0.8pt}}
+\def\tvline{\vrule width 0.8pt} 
+
+\def\therefore{%
+\setlength{\unitlength}{1pt}%
+\thinlines %
+\begin{picture}(12,12)%
+\put(2, 1){.}
+\put(5, 7){.}
+\put(8, 1){.}
+\end{picture}%
+\hspace{0.5zw}
+}%
+
+% 本文の標準サイズを 9pt にする
+%	Ref. URI = http://devo.mech.usp.ac.jp/~okumura/tex/a8.html
+{\catcode`\/=12
+ \global\expandafter\let\csname JY1/mc/m/n/10\endcsname=\relax}
+ \DeclareFontShape{JY1}{mc}{m}{n}{<-> s * [0.9856676] min10}{}
+ \DeclareFontShape{JY1}{gt}{m}{n}{<-> s * [0.9856676] goth10}{}
+ %
+ \newdimen\@Q\@Q=0.25mm
+ \renewcommand{\normalsize}{
+ \@setfontsize\normalsize{\@ixpt}{18.5\@Q}
+   \abovedisplayskip 9.25\@Q \@plus3\@Q \@minus3\@Q
+   \abovedisplayshortskip \z@ \@plus2\@Q
+   \belowdisplayshortskip 3\@Q \@plus2\@Q \@minus2\@Q
+    \belowdisplayskip \abovedisplayskip
+    \let\@listi\@listI}
+ \normalsize
+ \renewcommand{\small}{%
+   \@setfontsize\small{\@viiipt}{13\@Q}
+   \abovedisplayskip 8\@Q \@plus2\@Q \@minus2\@Q
+   \abovedisplayshortskip \z@ \@plus2\@Q
+   \belowdisplayshortskip 3\@Q \@plus2\@Q \@minus2\@Q
+   \belowdisplayskip \abovedisplayskip}
+ \renewcommand{\footnotesize}{\@setfontsize\footnotesize{\@viipt}{11\@Q}}
+ \renewcommand{\scriptsize}{\@setfontsize\scriptsize{\@vipt}{9\@Q}}
+ \renewcommand{\tiny}{\@setfontsize\tiny{\@vpt}{7\@Q}}
+ \renewcommand{\large}{\@setfontsize\large{\@xpt}{20\@Q}}
+ \renewcommand{\Large}{\@setfontsize\Large{\@xiipt}{24\@Q}}
+ \renewcommand{\LARGE}{\@setfontsize\LARGE{\@xivpt}{30\@Q}}
+ \renewcommand{\huge}{\@setfontsize\huge{\@xviipt}{32\@Q}}
+ \renewcommand{\Huge}{\@setfontsize\Huge{\@xxpt}{36\@Q}}
+
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+\newcommand{\wfig}[1]{図\ref{fig:#1}}
+\newcommand{\wtab}[1]{表\ref{tab:#1}}
+\newcommand{\weq}[1]{式(\ref{eq:#1})}
+\newcommand{\wsec}[1]{\textbf{\ref{sec:#1}}}

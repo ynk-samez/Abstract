@@ -1,0 +1,177 @@
+\documentclass[a4paper,10.5pt,twocolumn]{jsarticle}
+\usepackage{eshouroku}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{remreset}
+\usepackage{pdfpages}
+
+
+\makeatletter
+	\renewcommand{\theequation}{% 式番号の付け方
+	\thesection\arabic{equation}}
+	\@addtoreset{equation}{section}
+
+	\renewcommand{\thefigure}{% 図番号の付け方
+	\thesection\arabic{figure}}
+	\@addtoreset{figure}{section}
+
+	\renewcommand{\thetable}{% 表番号の付け方
+	\thesection\arabic{table}}
+	\@addtoreset{table}{section}
+\makeatother
+%\numberwithin{equation}{section}
+%\numberwithin{table}{section}
+%\numberwithin{figure}{section}
+
+
+\boldmaintrue% 主文を太字にするモード(指導教員添削時はこちら)
+%\boldmainfalse% 主文を普通文字にするモード(抄録印刷時はこちら)
+\graphicspath{{./figs/}}
+\begin{document}
+\twocolumn[
+ \講演番号{B-XX}% 必要ない場合には書かない
+ \日本語タイトル{\huge}{神経免疫相互作用に着想を得た\\マルチエージェントシステム型ニューラルネットワークの提案}
+ \英語タイトル{\large}{Proposal of Neural Network composed of Multi-Agent System Inspired by Nervous-Immune Interaction}
+ \筆者一名{5335}{柚木開登}
+
+ \指導教員一名{山本哲也}
+ %\指導教員二名{東京花子}{京都紀夫}
+ %\指導教員なし
+]
+
+%\addcontentsline{toc}{section}{\refname}% 追加
+
+\graphicspath{{./figs/}} % 図が特定のフォルダにある場合には設定
+
+\section{背景}
+ニューラルネットワークが, 
+\section{神経免疫相互作用}
+神経系と免疫系は独立したシステムではなく相互に調節を行い, 人体の恒常性を維持している
+ことが知られている.
+これは神経免疫相互作用(Neuroimmanue Interaction)と呼ばれ, 
+古くから経験的に知られていたストレスと疾患の関係の医学的な証左である.
+
+脳内免疫系は, ミクログリアと呼ばれるグリア細胞によって構成される.
+ミクログリアはまた, 
+脳の発達初期段階に行われる神経回路の刈り込み ----
+オーバーシュート型シナプス形成---- の実行者である.
+
+オーバーシュート型シナプス形成とは, 霊長類の大脳皮質に見られる
+生後直後からシナプス数が急速に増大し小児期に最大値に達したのち刈り込みが行われ減少していく
+シナプスのリモデリングである.
+このシナプス形成の刈り込み段階では, 統合失調症では刈り込みが通常よりも多く行われ, 
+逆にASDでは刈り込みが通常よりも少なく行われることが確認されており, 
+シナプスの刈り込みの制御が脳の高次機能維持・発現の要因である可能性が示唆される.
+\subsection{グリアアセンブリ}
+\label{sec:g-asem}
+生体の脳は神経細胞とグリア細胞によって構成される.
+グリア細胞とは脳内細胞のうち神経細胞以外を指し, 
+ミクログリア(microglia), アストロサイト(astrocyte),
+オリゴデンドロサイト(oligodendrocyte)の三種が大多数を占める.
+グリア細胞の役割は神経細胞への栄養運搬, 血流の制御, 電気信号の速度制御, 免疫等
+多岐にわたるが, 
+巨大なグリア細胞同士のネットワーク 
+---グリアアセンブリ(Glia Assembly)--- 
+が確認されており, グリア細胞が互いに協調し合いながら, 
+脳の機能維持を行っていると見られる.
+\section{提案モデル}
+\subsection{GA--NAのフィードバック機構}
+本研究ではニューロエージェント, シナプスエージェント, グリアエージェントの
+3種のエージェントが相互作用するモデルを提案する.以下, それぞれ$NA$, $SA$, $GA$と表記する.
+それぞれの代表的なプロパティ, メソッド及び, 通信内容は\wfig{agents}に示す通りである.
+
+これらのうち, 特に$NA$と$GA$の相互制御に関わる部分を詳しく述べる.
+双方の制御は以下の手順で行われる.
+\begin{description}
+  \item[$GA$から$NA$への制御]\mbox{}\\
+  \begin{enumerate}
+    \item 抑制信号$sig$を$NA$からのフィードバックをもとに\weq{koushin}に基づいて更新する.
+    \begin{align}
+      Glia(i).sig=Glia(i).sig-exp(Attn*Neuron(j).actf)
+      \label{eq:koushin}
+    \end{align}
+    \item $GA$は, 乱数$r$を生成する.
+    \item 仮に$r$が$sig$を超えた場合, 接続されたNAに対し, 
+    刈り込み実行命令を下す.
+    \item 刈り込み命令を受けた$NA$は自身に入力する$SA$のうち最も重みの小さなものとの接続を削除する.
+    \item 同時に$GA$は$Glia(i).sig=1.0$とし, 刈り込みの抑制を行う.
+  \end{enumerate}
+  \item[$NA$から$GA$への制御]\mbox{}\\
+  \begin{enumerate}
+    \item $NA$は隣接する他の$NA$と出力値の集合を生成する.
+    \item Grubbs検定を用いてその集合のうち最も外れ値を持つ$NA$を特定する.
+    \item 先の検定の結果, 外れ値を持つ$NA$が自身であった場合には活動回数を示す内部状態量$activ$に$1$を加算する.
+    \item miniBatchSize毎に活動度合いを示す$actf$を算出する.
+    具体的には, 以下の式で求める.
+    \begin{align}
+      Neuron(i).actf=\frac{Neuron(i).activ}{miniBatchSize}  
+    \end{align}
+  \end{enumerate}  
+\end{description}
+GAからNAへの制御はNAに接続された最も重みの小さなシナプスとの接合を切る.
+\subsection{グリアネットワーク}
+\wsec{g-asem}節に述べた通り, 実際の脳ではミクログリアは単体で
+刈り込みを行っているのではなく, 
+グリアアセンブリを介して, 協調し全体としての利益に資する行動を
+とっているものと見られる.
+
+本研究ではグリアアセンブリの模倣として$GA$同士のネットワークである
+グリアネットワークを定義した.
+グリアネットワークの役割は, 時空間的に
+局所的な刈り込みが行われネットワークの破綻を防ぐというものである.
+
+このアイデアは抑制信号を伝達するという形で実装した.
+抑制信号は, グリアネットワーク上の伝播距離(ホップ数)に応じて減衰していく.
+本実験では単純にホップカウントに0.1を乗じた値だけ減少するように実装した.
+なお, 複数の距離が与えられた場合, 最も近い$GA$の影響を優先する.
+\wfig{sig}の場合, $g_1\rightarrow g_2$と$g_3\rightarrow g_4 \rightarrow g_5$の経路では前者の経路のみを考えることになる.
+
+\section{計算機実験}
+学習タスクは, 6bitの入力の上位3bitのいずれかに1が入っているかどうか
+の判別である. 出力値は結果が真である確率である. 
+その他のパラメータは以下に示す通りである(\wtab{param}).
+\begin{table}[H]
+  \caption{パラメータ一覧}
+  \label{tab:param}
+  \centering
+   \begin{tabular}{ll}
+    \toprule
+      パラメータ&値\\\midrule
+      学習率$\eta$&$0.01$\\
+      エポック数$Epocs$&$500$\\
+      ミニバッチサイズ$miniBatchSize$&$100$\\
+      初期ニューロン数$Neurons$&$31$\\
+      初期グリア数$Glias$&$31$\\
+      初期シナプス数$Mill$&$182$\\
+      入力サイズ$Inputs$&$6$\\
+      出力サイズ$Outputs$&$1$\\
+    \bottomrule
+   \end{tabular}
+ \end{table}
+計算機実験の結果, \wfig{syna}が\wfig{span}得られた.
+
+
+ 
+\section{結論}
+グリア細胞に着想を得た監視エージェントを導入することによって
+全体の管理者のいないMASに対応した
+ニューラルネットワークの学習パラメータの削減を行うことができた.
+このパラメータの削減にあたっては, 学習精度の悪化が認められなかったことから, 
+刈り込みが適切に行われたものと評価できる
+一方で, グリアネットワークの構造依存性や
+MASに特有な問題(合意制御, 環境認識), あるいは畳み込みのMAS化など
+実用化にあたっては
+さらなる発展が必要である.
+\begin{align}
+  \exp(x) exp(x)
+\end{align}
+ \begin{thebibliography}{99}
+  \bibitem{Tensorizing}
+  Novikov, Alexander, et al. "Tensorizing neural networks." Advances in neural information processing systems 28 (2015).
+  \bibitem{次数重み付き平均法}
+  原田和明, 右田剛史, and 高橋規一.``ニューラルネットワークの分散学習における新たな合意重み決定法.'' IEICE Conferences Archives. The Institute of Electronics, Information and Communication Engineers, 2019.
+\end{thebibliography}
+ \end{document}
