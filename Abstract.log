@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  14 FEB 2023 18:31
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  14 FEB 2023 19:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -232,7 +232,9 @@ Package pdfpages Warning: I will use a dummy \includepdf command
 \AM@toc@title=\toks27
 \c@AM@survey=\count284
 \AM@templatesizebox=\box73
-) (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write3
+Excluding comment 'comment') (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
 File: l3backend-dvips.def 2022-02-07 L3 backend support: dvips
 \l__pdf_internal_box=\box74
 \g__pdf_backend_object_int=\count285
@@ -325,56 +327,54 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 49.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 9.85672pt on input line 49.
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.91403pt on input line 83.
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.92836pt on input line 83.
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 84.
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 84.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 84.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.87105pt on input line 84.
-
-LaTeX Warning: Reference `fig:agents' on page 1 undefined on input line 84.
-
-
-Overfull \hbox (33.2803pt too wide) detected at line 95
-[]
- []
-
-
+Excluding 'comment' comment.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 5.91403pt on input line 106.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 4.92836pt on input line 106.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 107.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 107.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 107.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 8.87105pt on input line 107.
 
-LaTeX Warning: Reference `fig:sig' on page 1 undefined on input line 130.
+LaTeX Warning: Reference `fig:agents' on page 1 undefined on input line 107.
+
+
+Overfull \hbox (33.2803pt too wide) detected at line 118
+[]
+ []
 
 [1
 
 
 ]
 
-LaTeX Warning: Reference `fig:syna' on page 2 undefined on input line 154.
+LaTeX Warning: Reference `fig:sig' on page 2 undefined on input line 153.
 
 
-LaTeX Warning: Reference `fig:span' on page 2 undefined on input line 154.
+LaTeX Warning: Reference `fig:syna' on page 2 undefined on input line 177.
 
-[2
 
-] (./Abstract.aux)
+LaTeX Warning: Reference `fig:span' on page 2 undefined on input line 177.
+
+[2] (./Abstract.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4112 strings out of 478724
- 64533 string characters out of 5858391
- 396531 words of memory out of 5000000
- 22503 multiletter control sequences out of 15000+600000
+ 4166 strings out of 478724
+ 65647 string characters out of 5858391
+ 395439 words of memory out of 5000000
+ 22553 multiletter control sequences out of 15000+600000
  480388 words of font info for 74 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  70i,10n,76p,267b,327s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (2 pages, 12444 bytes).
+Output written on Abstract.dvi (2 pages, 14380 bytes).
