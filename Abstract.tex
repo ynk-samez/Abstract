@@ -8,6 +8,10 @@
 \usepackage{remreset}
 \usepackage{pdfpages}
 \usepackage{comment}
+\usepackage{geometry}
+\renewcommand{\baselinestretch}{0.90}
+%\usepackage[top=2cm, bottom=2cm, left=1cm, right=1cm]{geometry}
+
 
 \makeatletter
 	\renewcommand{\theequation}{% 式番号の付け方
@@ -29,7 +33,7 @@
 
 \boldmaintrue% 主文を太字にするモード(指導教員添削時はこちら)
 %\boldmainfalse% 主文を普通文字にするモード(抄録印刷時はこちら)
-\graphicspath{{./figs/}}
+\graphicspath{{./figs}}
 \begin{document}
 \twocolumn[
  \講演番号{B-XX}% 必要ない場合には書かない
@@ -67,7 +71,7 @@
 従来, データセンターで動いていたモデルを計算資源に乏しいエッジ環境に投入する必要があることから
 少なくとも以下2点の課題が考えられる.
 1つ目は学習パラメータ削減によるモデルの軽量化, 
-2つ目は, エッジ環境内の不均一計算資源の最大限の有効利用
+2つ目は, エッジ環境内の不均一計算資源の利用
 である.
 前者については刈り込みや, ニューラルアーキテクチャ探索, 後者についてはエージェント志向アーキテクチャによる
 分散処理システムや遊休計算資源を用いた大規模分散計算等があり, 
@@ -79,13 +83,9 @@
 
 そこで本研究では, 将来的に導入が予測されるエッジコンピューティングアーキテクチャ及び, 
 それに対応した機械学習手法である連合学習に向けて, 
-自律分散性を持ったニューラルネットワークのパラメータ削減を提案する(\wfig{Method}).
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=8cm]{Method.pdf}
-  \caption{従来法と提案法との比較}
-  \label{fig:Method}
-\end{figure}
+自律分散性を持ったニューラルネットワークのパラメータ削減を提案する.
+具体的に, 自律分散的なパラメータ削減のとして生体の脳で行われるグリア細胞によるシナプスの刈り込みに
+着目し, これに関与する細胞をモデル化したエージェントを投入したマルチエージェントシステムを実装した.
 \section{生物学的背景}
 \subsection{神経免疫相互作用}
 神経系と免疫系は独立したシステムではなく相互に調節を行い, 人体の恒常性を維持している
@@ -113,49 +113,74 @@
 多岐にわたるが, 巨大なグリア細胞同士のネットワーク 
 ---グリアアセンブリ(Glia Assembly)--- 
 が確認されており, 異種グリア細胞が互いに協調し合いながら, 
-脳の機能維持を行っているものの, 
-その具体的なメカニズムは現在までに知られていない.
+脳の機能維持を行っていること知られている.
 \section{提案モデル}
-\subsection{概要}
-本モデルは, 自律分散的なパラメータ削減として生体の脳で行われるグリア細胞による
-シナプスの刈り込みをモデル化し, マルチエージェントシステムとして実装している.
-投入するエージェントはNeuro-Agent, Synapse-Agent, Glia-Agentであり, 
-それぞれがニューロン, シナプス, グリア細胞に対応する. 
-また神経免疫相互作用に着想を得て, 
+\subsection{神経免疫相互作用に基づく相互調節モデル}
+本提案モデルはニューロン, シナプス, グリアを
+モデル化したNeuro-Agent(NA), Synapse-Agent(SA), Glia-Agent($GA$)
+の3種のエージェントによる
+マルチエージェントシステムである.
+このうち, NAとSAによる相互作用は従来のニューラルネットワークと
+等価なシステムであるので省略し, 本節では$GA$---NA間の相互調節モデル(\wfig{NeuroGlia})について述べる.
+\vspace{-2zh}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6cm]{NeuroGlia.pdf}
+  \caption{Neuro-AgentとGlia-Agentの接続}
+  \label{fig:NeuroGlia}
+\end{figure}
+\vspace{-2zh}
+$GA$の役割は, ニューラルネットワークのシナプスの刈り込みである. 
+$GA$は内部で乱数を生成し, 内部変数$sig$を閾値に用いた条件分岐を行う.
+乱数が閾値を超えた場合には, 自身に1対1に対応したNAに接続された最も重みの小さな
+SAを刈り込む. 
+また, 刈り込み指令を出した$GA$は内部変数$sig$を$1.0$に更新する.
+逆にNAは自身の活動頻度$freq$を用いた式(\weq{new})で$sig$を調節更新する.
 
-
-\subsection{神経免疫相互作用に基づくフィードバック}
-これらのうち, 特に$NA$と$GA$の相互制御に関わる部分を詳しく述べる.
-双方の制御は以下の手順で行われる.
-
-GAからNAへの制御はNAに接続された最も重みの小さなシナプスとの接合を切る.
+\begin{align}
+  Glia.sig\leftarrow Glia.sig-&\displaystyle \cfrac{2}{1+exp((Neuron.freq-0.1))}-1\\
+  &k=6\ln(3)
+  \label{eq:new}
+\end{align}
+ここで, NAの活動頻度とは以下のように求める.
+\begin{enumerate}
+  \item 活動頻度計算用変数$T$を用意する.
+  \item エージェント自身を含むクリークにおいて, 
+  smirnov-grubbs検定を行う.
+  \item 検定の結果, 自身が外れ値であると判断された場合に1, そうでなければ0を$T$に加算する.
+  \item 2〜3の工程をミニバッチ分繰り返す.
+  \item 以下の式を用いて, 自身の活動頻度が求まる.
+  \vspace{-2zh}
+  \begin{align}
+    Neuron.freq=\cfrac{T}{miniBatchSize}
+  \end{align}
+\end{enumerate} 
 \subsection{グリアネットワーク}
 \wsec{g-asem}節に述べた通り, 実際の脳ではミクログリアは単体で
 刈り込みを行っているのではなく, 
 グリアアセンブリを介して, 協調し全体としての利益に資する行動を
 とっているものと見られる.
 
-本研究ではグリアアセンブリの模倣として$GA$同士のネットワークである
+本モデルはグリアアセンブリの模倣として$GA$同士のネットワークである
 グリアネットワークを定義した.
-グリアネットワークの役割は, 時空間的に
-局所的な刈り込みが行われネットワークの破綻を防ぐというものである.
+グリアネットワークは, 抑制信号$sig$を他の$GA$に伝播する.
+これにより, 時空間的に局所的な刈り込みを抑制し, ネットワークの破綻を防ぐ役割がある.
 
-このアイデアは抑制信号を伝達するという形で実装した.
-抑制信号は, グリアネットワーク上の伝播距離(ホップ数)に応じて減衰していく.
-本実験では単純にホップカウントに0.1を乗じた値だけ減少するように実装した.
+抑制信号は, グリアネットワーク上の伝播距離(ホップ数)に応じて減衰定数$A$だけ減衰していく.
 なお, 複数の距離が与えられた場合, 最も近い$GA$の影響を優先する.
-\wfig{GliaNetworks}の$g_2$の場合, 
+例えば, \wfig{GliaNetworks}の$g_2$の場合, 
 $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者の経路のみを考えることになる.
-
+\vspace{-3zh}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{GliaNetworks.pdf}
+  \includegraphics[width=8cm]{GliaNetworks.pdf}
   \caption{グリアネットワークでの抑制信号の伝達}
   \label{fig:GliaNetworks}
 \end{figure}
+\vspace{-2zh}
 \section{計算機実験}
-学習タスクは, 6bitの入力の上位3bitのいずれかに1が入っているかどうか
-の判別である. 出力値は結果が真である確率である. 
+学習タスクとして6bitの入力の上位3bitのいずれかに1が入っているかどうか
+の判別を行った出力値は結果が真である確率である. 
 その他のパラメータは以下に示す通りである(\wtab{param}).
 \begin{table}[H]
   \caption{パラメータ一覧}
@@ -165,19 +190,38 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
     \toprule
       パラメータ&値\\\midrule\midrule
       学習率$\eta$&$0.01$\\
-      エポック数$Epocs$&$500$\\
+      エポック数$Epocs$&$100$\\
       ミニバッチサイズ$miniBatchSize$&$100$\\
       初期ニューロン数$Neurons$&$31$\\
       初期グリア数$Glias$&$31$\\
       初期シナプス数$Mill$&$182$\\
+      減衰率$A$&0.01\\
       入力サイズ$Inputs$&$6$\\
       出力サイズ$Outputs$&$1$\\
     \bottomrule
    \end{tabular}
  \end{table}
-計算機実験の結果, \wfig{syna}が\wfig{span}得られた.
-
-
+計算機実験の結果を\wfig{SynapseNum},\wfig{LearningCurve}に示す.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{Graph-crop.pdf} 
+  \caption{刈り込み後のネットワーク}
+  \label{fig:Graph}
+\end{figure}
+\vspace{-2zh}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{SynapseNum-crop.pdf} 
+  \caption{シナプス量の変化}
+  \label{fig:SynapseNum}
+\end{figure}
+\vspace{-2zh}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{LearningCurve-crop.pdf} 
+  \caption{学習曲線}
+  \label{fig:LearningCurve}
+\end{figure}
  
 \section{結論}
 グリア細胞に着想を得た監視エージェントを導入することによって
@@ -189,9 +233,6 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
 MASに特有な問題(合意制御, 環境認識), あるいは畳み込みのMAS化など
 実用化にあたっては
 さらなる発展が必要である.
-\begin{align}
-  \exp(x) exp(x)
-\end{align}
  \begin{thebibliography}{99}
   \bibitem{Neuron-Glia} 	
 野村靖幸,北海道大学,神経免疫相関とくにニューロン・グリア相互作用機構に関する分子薬理学的研究, \url{https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-06454595/}
