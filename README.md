@@ -1,4 +1,5 @@
-# 抄録用のgitリポジトリ
+# 卒論抄録用のgitリポジトリ
+
 ```
-git clone 
+git clone https://github.com/ynk-samez/Abstract.git 
 ```
