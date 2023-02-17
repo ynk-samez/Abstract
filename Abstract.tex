@@ -8,8 +8,13 @@
 \usepackage{remreset}
 \usepackage{pdfpages}
 \usepackage{comment}
-
+\usepackage{subfigure}
 \usepackage{amsmath}
+
+\renewcommand{\subfigtopskip}{5pt}	% 図の上の隙間。上図の副題と下図の間。
+\renewcommand{\subfigbottomskip}{0pt} % 図の下の隙間。副題と本題の間。
+\renewcommand{\subfigcapskip}{-6pt}	% 図と副題の間
+\renewcommand{\subcapsize}{\scriptsize} % 副題の文字の大きさ
 
 
 \makeatletter
@@ -87,7 +92,8 @@
 グリア細胞による神経回路の刈り込みに着目し, 
 神経免疫相互作用に基づくニューロンとグリアの相互調節機構をマルチエージェントシステムとして実装した.
 \section{提案モデル}
-\subsection{マルチエージェントシステムによるニューラルネットワーク}
+\begin{comment}
+  ジェントシステムによるニューラルネットワーク}
 本モデルでは, ニューラルネットワークをNeuro-AgentとSynapse-Agentという
 2種のエージェントからなるマルチエージェントシステムとして構築している. 
 以下, それぞれの役割について説明する.
@@ -114,10 +120,11 @@
   ここで, 式中の$weight$は, そのSynapse-Agentの重みを示し, 
   主にこれを誤差逆伝播法を用いて更新することで, ニューラルネットワークが学習される.
 \end{description}
+\end{comment}
 \subsection{神経免疫相互作用に基づく相互調節モデル}
 Neuro-Agent, Synapse-Agentに続く第三のエージェントとしてニューラルネットワーク中の不要なSynapse-Agentの刈り込みを行うGlia-Agentを導入する. 
 Glia-Agentは生体の脳内においてシナプスの刈り込みを行う
-脳内免疫系を司るミクログリア, 及びミクログリア(microglia)の機能を中心に
+脳内免疫系を司るミクログリア(microglia)の機能を中心に
 中枢神経系グリア細胞の機能をモデル化したエージェントである.
 
 Glia-Agentは, Neuro-Agentと1対1で接続され, 内部変数$sig$を閾値に用いて, 
@@ -130,21 +137,19 @@ Glia-Agentは, Neuro-Agentと1対1で接続され, 内部変数$sig$を閾値に
   \caption{Neuro-Glia相互調節機構} 
 \end{figure}
 
-\begin{comment}
 \begin{figure}[H]
-  \begin{minipage}{0.5\hsize}
-    \centering
-    \includegraphics{FlowChartGN.pdf}
-    \subcaption{Glia-AgentからNeuro-Agentへの作用:刈り込み}
-  \end{minipage}
-  \begin{minipage}{0.5\hsize}
-    \centering
-    \includegraphics{FlowChartNG.pdf}
-    \subcaption{Neuro-AgentからGlia-Agentへの作用:閾値の調節}
-  \end{minipage}
-  \caption{キャプション}
-\end{figure}
-\end{comment}
+  \begin{center}
+   \subfigure[Glia-AgentからNeuro-Agentへの作用:刈り込み]{	% 副題なし
+    \includegraphics[width=.5\columnwidth]{FlowChartGN.pdf}
+   }~ % 改行
+   \subfigure[Neuro-AgentからGlia-Agentへの作用:閾値の調節]{
+    \includegraphics[width=.5\columnwidth]{FlowChartNG.pdf}
+   }
+   \caption{Neuro-Glia相互調節機能の処理フロー} 
+   \label{fig:target}
+  \end{center}
+ \end{figure}
+\wfig{target}中の関数$func(Neuron.freq)$は, \weq{new}の関数を用いた
 \begin{align}
   Glia.sig\leftarrow Glia.sig-&\displaystyle \cfrac{2}{1+exp((Neuron.freq-0.1))}-1\\
   &k=6\ln(3)

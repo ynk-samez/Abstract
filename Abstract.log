@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  17 FEB 2023 15:44
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  17 FEB 2023 16:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -234,15 +234,33 @@ Package pdfpages Warning: I will use a dummy \includepdf command
 \AM@templatesizebox=\box73
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write3
-Excluding comment 'comment') (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
+Excluding comment 'comment') (/usr/local/texlive/2022/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip56
+\subfigcapskip=\skip57
+\subfigcaptopadj=\dimen256
+\subfigbottomskip=\skip58
+\subfigcapmargin=\dimen257
+\subfiglabelskip=\skip59
+\c@subfigure=\count285
+\c@lofdepth=\count286
+\c@subtable=\count287
+\c@lotdepth=\count288
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/local/texlive/2022/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip60
+\subfig@bottom=\skip61
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
 File: l3backend-dvips.def 2022-02-07 L3 backend support: dvips
 \l__pdf_internal_box=\box74
-\g__pdf_backend_object_int=\count285
+\g__pdf_backend_object_int=\count289
 \l__pdf_backend_content_box=\box75
 \l__pdf_backend_model_box=\box76
-\g__pdf_backend_annotation_int=\count286
-\g__pdf_backend_link_int=\count287
-\g__pdf_backend_link_sf_int=\count288
+\g__pdf_backend_annotation_int=\count290
+\g__pdf_backend_link_int=\count291
+\g__pdf_backend_link_sf_int=\count292
 )
 
 LaTeX Warning: Unused global option(s):
@@ -251,24 +269,24 @@ LaTeX Warning: Unused global option(s):
 (./Abstract.aux)
 \openout1 = `Abstract.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 *geometry* driver: auto-detecting
 *geometry* detected driver: dvips
 *geometry* verbose mode - [ preamble ] result:
@@ -314,68 +332,69 @@ Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 ))
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 46.
+(Font)              scaled to size 16.60605pt on input line 51.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 17.03241pt on input line 46.
+(Font)              scaled to size 17.03241pt on input line 51.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 9.85672pt on input line 46.
+(Font)              scaled to size 9.85672pt on input line 51.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 52.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 57.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 52.
+(Font)              scaled to size 9.60999pt on input line 57.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 52.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 57.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.85672pt on input line 52.
-Excluding 'comment' comment.
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 95.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.87105pt on input line 95.
+(Font)              scaled to size 9.85672pt on input line 57.
+Excluding 'comment' comment. Excluding 'comment' comment.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.91403pt on input line 98.
+(Font)              scaled to size 5.91403pt on input line 130.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.92836pt on input line 98.
-
-Underfull \vbox (badness 2213) has occurred while \output is active []
-
+(Font)              scaled to size 4.92836pt on input line 130.
 File: ./figs//NewNeuroGlia.pdf Graphic file (type pdf)
 <./figs//NewNeuroGlia.pdf>
-Excluding 'comment' comment.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: ./figs//FlowChartGN.pdf Graphic file (type pdf)
+<./figs//FlowChartGN.pdf>
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 5.76599pt on input line 144.
+File: ./figs//FlowChartNG.pdf Graphic file (type pdf)
+<./figs//FlowChartNG.pdf>
+
+Overfull \hbox (16.44434pt too wide) in paragraph at lines 144--148
+ []  [] 
+ []
 
 [1
 
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 167.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 172.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 167.
+(Font)              scaled to size 8.64899pt on input line 172.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 167.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 172.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.87105pt on input line 167.
+(Font)              scaled to size 8.87105pt on input line 172.
 
-LaTeX Warning: Reference `sec:g-asem' on page 2 undefined on input line 167.
+LaTeX Warning: Reference `sec:g-asem' on page 2 undefined on input line 172.
 
 File: ./figs//GliaNetworks.pdf Graphic file (type pdf)
 <./figs//GliaNetworks.pdf>
-
-Underfull \vbox (badness 1430) has occurred while \output is active []
-
 File: ./figs//Graph-crop.pdf Graphic file (type pdf)
 <./figs//Graph-crop.pdf>
 File: ./figs//SynapseNum-crop.pdf Graphic file (type pdf)
 <./figs//SynapseNum-crop.pdf>
 File: ./figs//LearningCurve-crop.pdf Graphic file (type pdf)
 <./figs//LearningCurve-crop.pdf>
-[2]
-Underfull \hbox (badness 1107) in paragraph at lines 249--250
+
+Underfull \hbox (badness 1107) in paragraph at lines 254--255
 []\JY1/mc/m/n/9 野村靖幸\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 北海道大学\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 神経免疫相関とくにニ
  []
 
-[3
+[2] [3
 
 ] (./Abstract.aux)
 
@@ -383,12 +402,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4206 strings out of 478724
- 66670 string characters out of 5858391
- 391491 words of memory out of 5000000
- 22584 multiletter control sequences out of 15000+600000
- 480388 words of font info for 74 fonts, out of 8000000 for 9000
+ 4393 strings out of 478724
+ 69770 string characters out of 5858391
+ 391458 words of memory out of 5000000
+ 22764 multiletter control sequences out of 15000+600000
+ 480271 words of font info for 74 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 70i,10n,76p,267b,323s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 70i,10n,76p,267b,392s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (3 pages, 16820 bytes).
+Output written on Abstract.dvi (3 pages, 14880 bytes).
