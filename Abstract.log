@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  17 FEB 2023 18:56
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  17 FEB 2023 18:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -264,24 +264,24 @@ File: l3backend-dvips.def 2022-02-07 L3 backend support: dvips
 ) (./Abstract.aux)
 \openout1 = `Abstract.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
 *geometry* driver: auto-detecting
 *geometry* detected driver: dvips
 *geometry* verbose mode - [ preamble ] result:
@@ -327,31 +327,30 @@ Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 ))
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 68.
+(Font)              scaled to size 16.60605pt on input line 69.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 17.03241pt on input line 68.
+(Font)              scaled to size 17.03241pt on input line 69.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 9.85672pt on input line 68.
+(Font)              scaled to size 9.85672pt on input line 69.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 74.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 74.
+(Font)              scaled to size 9.60999pt on input line 75.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 74.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.85672pt on input line 74.
+(Font)              scaled to size 9.85672pt on input line 75.
 Excluding 'comment' comment.
 File: ./figs//ThisModel.pdf Graphic file (type pdf)
 <./figs//ThisModel.pdf>
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.91403pt on input line 122.
+(Font)              scaled to size 5.91403pt on input line 123.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.92836pt on input line 122.
-
-Underfull \vbox (badness 1728) has occurred while \output is active []
-
+(Font)              scaled to size 4.92836pt on input line 123.
 File: ./figs//NeuroGlia.pdf Graphic file (type pdf)
 <./figs//NeuroGlia.pdf>
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 6.8997pt on input line 164.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -359,39 +358,31 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 6.8997pt on input line 163.
 File: ./figs//GliaNetworks.pdf Graphic file (type pdf)
 <./figs//GliaNetworks.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 File: ./figs//Graph-crop.pdf Graphic file (type pdf)
 <./figs//Graph-crop.pdf>
 File: ./figs//SynapseNum-crop.pdf Graphic file (type pdf)
 <./figs//SynapseNum-crop.pdf>
 File: ./figs//LearningCurve-crop.pdf Graphic file (type pdf)
 <./figs//LearningCurve-crop.pdf>
-[2]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 254.
+(Font)              scaled to size 8.64899pt on input line 255.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.87105pt on input line 254.
+(Font)              scaled to size 8.87105pt on input line 255.
 
-Underfull \hbox (badness 1107) in paragraph at lines 254--255
+Underfull \hbox (badness 1107) in paragraph at lines 255--256
 []\JY1/mc/m/n/9 野村靖幸\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 北海道大学\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 神経免疫相関とくにニ
  []
 
-[3
-
-] (./Abstract.aux) ) 
+[2] (./Abstract.aux) ) 
 Here is how much of TeX's memory you used:
  4383 strings out of 478724
  69560 string characters out of 5858391
- 392373 words of memory out of 5000000
+ 395376 words of memory out of 5000000
  22756 multiletter control sequences out of 15000+600000
  480275 words of font info for 74 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  70i,10n,76p,267b,329s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (3 pages, 16500 bytes).
+Output written on Abstract.dvi (2 pages, 16268 bytes).
