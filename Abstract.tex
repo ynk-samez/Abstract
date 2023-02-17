@@ -123,12 +123,13 @@
   それぞれのNeuro-Agentは, 情報を受け取るための複数の入力$x_i$ $\;(i= 1, 2, 3, \cdots m)$と, 
   内部変数$b$を持ち, 
   これを処理して別のNeuro-Agentに情報を送信するための出力$y$を生成する.
-  この時の内部処理は, \weq{Neuro-Agent}に示す通り, 標準的な人工ニューロンと同等である.
-  \
+  この時の内部処理は\weq{Neuro-Agent}に示す通り, 
+  標準的な人工ニューロンと同等に, 活性化関数$\phi$を用いた変換である.
   \begin{align}
     y=\phi(\sum_{i=1}^m x_i+b)
     \label{eq:Neuro-Agent}
   \end{align}
+  なお, 本モデルにおいては活性関数にシグモイドを採用している.
   \subsubsection*{●Synapse-Agent}
   神経回路における接触構造であるシナプスをモデル化したエージェントであり, 
   Neuro-Agent間の情報の伝達を担当する.
@@ -162,14 +163,14 @@ Glia-AgentとNeuro-Agentは\wfig{NeuroGlia}に示すように, 1:1で接続さ�
 Neuro-Agentは刈り込み命令を受け取ると, 自身に接続された最も重みが0に近いSynapse-Agentを
 削除する.
 \subsubsection*{Neuro-AgentからGlia-Agentへの作用:$sig$の調節}
-逆に, Neuro-Agentは自身の活動頻度$freq$を用いて, Glia-Agentの内部変数$sig$を更新する.
+逆に, Neuro-Agentは自身の活動頻度$freq_N$を用いて, Glia-Agentの内部変数$sig_G$を更新する.
 この更新式は, \weq{sig}に示す通りである.
 \begin{align}
-  sig\leftarrow sig-&\cfrac{2}{1-6\ln(3)\exp(Neuro.freq-0.01)}-1
+  sig_G\leftarrow sig_G-&\alpha\{\cfrac{2}{1-6\ln(3)\exp(freq_N-0.01)}-1\}
   \label{eq:sig}
 \end{align}
-\weq{sig}が示す等に, Neuro-Agentは自身の活動頻度$freq$が高ければ, $sig$を上げることで刈り込まれにくく, 
-逆に$freq$が0に近いほど$sig$を下げ刈り込み命令の発出を容易するようにフィードバックを行う.
+\weq{sig}が示す等に, Neuro-Agentは自身の活動頻度$freq_N$が高ければ, $sig_G$を上げることで刈り込まれにくく, 
+逆に$freq_N$が0に近いほど$sig_G$を下げ刈り込み命令の発出を容易するようにフィードバックを行う.
 \subsection{グリアネットワーク}
 実際の脳ではグリア細胞は単体で
 刈り込みを行っているのではなく, 
@@ -195,6 +196,8 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
 \section{計算機実験}
 学習タスクとして6bitの入力の上位3bitのいずれかに1が入っているかどうか
 の判別を行った出力値は結果が真である確率である. 
+また, 初期ネットワーク構造はノード数が
+入力側から$6\rightarrow 8\rightarrow 8\rightarrow 8\rightarrow 1$の5層全結合ネットワークとした.
 その他のパラメータは以下に示す通りである(\wtab{param}).
 \begin{table}[H]
   \caption{パラメータ一覧}
@@ -212,6 +215,7 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
       減衰率$A$&0.01\\
       入力サイズ$Inputs$&$6$\\
       出力サイズ$Outputs$&$1$\\
+      フィードバックスケーリング$\alpha$&0.01\\
     \bottomrule
    \end{tabular}
  \end{table}
