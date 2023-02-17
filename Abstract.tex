@@ -67,7 +67,7 @@
 エッジコンピューティングでの機械学習手法として連合学習(Federareted Lerning)が提案されている.
 連合学習では, 学習データを集約せずネットワーク中の各ノードで学習し, 
 その結果得たパラメータ差分のみを通信し, 平均化することで
-大規模な学習済みモデルを構築するため, プライバシーを含んだ学習データは保護される.
+大規模な学習済みモデルを構築するため, プライバシーを含んだ学習データは各ノード内に保護される.
 機械学習への期待と世界的な個人情報保護の動きの高まりから, 
 将来的に連合学習は情報社会において重要な位置を占めることが予測される.
 
@@ -87,10 +87,15 @@
 
 そこで本研究では, 将来的に導入が予測されるエッジコンピューティングアーキテクチャ及び, 
 それに対応した機械学習手法である連合学習に向けて, 
-自律分散性を持ったニューラルネットワークのパラメータ削減を提案する.
+自律分散性を持ったニューラルネットワークのパラメータ削減を提案する\wfig{ThisModel}.
 提案にあたっては, 生体の脳における自律分散的なパラメータ削減である
 グリア細胞による神経回路の刈り込みに着目し, 
 神経免疫相互作用に基づくニューロンとグリアの相互調節機構をマルチエージェントシステムとして実装した.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{ThisModel.pdf}
+  \label{fig:ThisModel}
+\end{figure}
 \section{提案モデル}
 \begin{comment}
   ジェントシステムによるニューラルネットワーク}
@@ -122,52 +127,55 @@
 \end{description}
 \end{comment}
 \subsection{神経免疫相互作用に基づく相互調節モデル}
-Neuro-Agent, Synapse-Agentに続く第三のエージェントとしてニューラルネットワーク中の不要なSynapse-Agentの刈り込みを行うGlia-Agentを導入する. 
-Glia-Agentは生体の脳内においてシナプスの刈り込みを行う
-脳内免疫系を司るミクログリア(microglia)の機能を中心に
-中枢神経系グリア細胞の機能をモデル化したエージェントである.
+本提案は, 細胞間ネットワークとしての生体システムの模倣及び, 
+自律分散性の保証といった観点からマルチエージェントシステムとして解釈・実装している.  
+以下, 投入するエージェントについて説明する.
+\begin{description}
+  \item[Neuro-Agent]
+  神経細胞をモデル化したエージェントであり, 情報の受容, 処理, 
+  転送などを担当する.
+  それぞれのNeuro-Agentは, 情報を受け取るための複数の入力$x_i$ $\;(i= 1, 2, 3, \cdots m)$と, 
+  内部変数$b$を持ち, 
+  これを処理して別のNeuro-Agentに情報を送信するための出力$y$を生成する.
+  この時の内部処理は, \weq{Neuro-Agent}に示す通り, 標準的な人工ニューロンと同等である.
+  \begin{align}
+    y=\phi(\sum_{i=1}^m x_i+b)
+    \label{eq:Neuro-Agent}
+  \end{align}
+  \item[Synapse-Agent]神経回路における接触構造であるシナプスをモデル化したエージェントであり, 
+  Neuro-Agent間の情報の伝達を担当する.
+  それぞれのSynapse-Agentは, 入力$u$を受け取り, それを変換した値$v$を出力する(\weq{Synapse-Agent}). 
+  この出力は別のNeuro-Agentの入力として使用される.
+  \begin{align}
+    v=weight\cdot u
+ \label{eq:Synapse-Agent}   
+  \end{align}
+  ここで, 式中の$weight$は, そのSynapse-Agentの重みを示し, 
+  主にこれを誤差逆伝播法を用いて更新することで, ニューラルネットワークが学習される.
+  \item[Glia-Agent]神経細胞の補助細胞であるグリア細胞(Glia-Cell)の機能を模倣したエージェント。
+  Glia-Agentは, Neuro-AgentとSynapse-Agentによって構成されるニューラルネットワークに対して,
+  シナプスの刈り込みを行い, パラメータ削減による学習の効率化・高速化を試みる. 
+\end{description}
+次に, 具体的にGlia-AgentがNeuro-Agentに対して行う刈り込み命令の発出, 及び
+Neuro-AgentからGlia-Agentへのフィードバックによる刈り込みの制御について説明する.
 
-Glia-Agentは, Neuro-Agentと1対1で接続され, 内部変数$sig$を閾値に用いて, 
-確率的にNeuro-Agentに刈り込み指令を発出する. 
-逆に, Neuro-Agentは自身の活動頻度$freq$を用いて, $sig$を調節するフィードバック
-を行う.
+Glia-AgentとNeuro-Agentは\wfig{NeuroGlia}に示すように, 1:1で接続され相互に調節を行う.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=8cm]{NewNeuroGlia.pdf} 
-  \caption{Neuro-Glia相互調節機構} 
+  \includegraphics[width=8cm]{NeuroGlia.pdf}  
+  \label{fig:NeuroGlia}
+  \caption{Neuro-Glia相互調節機構}
 \end{figure}
-
-\begin{figure}[H]
-  \begin{center}
-   \subfigure[Glia-AgentからNeuro-Agentへの作用:刈り込み]{	% 副題なし
-    \includegraphics[width=.5\columnwidth]{FlowChartGN.pdf}
-   }~ % 改行
-   \subfigure[Neuro-AgentからGlia-Agentへの作用:閾値の調節]{
-    \includegraphics[width=.5\columnwidth]{FlowChartNG.pdf}
-   }
-   \caption{Neuro-Glia相互調節機能の処理フロー} 
-   \label{fig:target}
-  \end{center}
- \end{figure}
-\wfig{target}中の関数$func(Neuron.freq)$は, \weq{new}の関数を用いた
+Glia-AgentからNeuro-Agentに対して行う作用; 
+シナプスの刈り込み命令はGlia-Agentの内部変数$sig$
+を閾値に用いて確率的に実行する.
+逆に, Neuro-Agentは自身の活動頻度$freq$を用いて, Glia-Agentの内部変数$sig$を更新する.
+この更新式は, \weq{Sig}に示す通りである.
 \begin{align}
-  Glia.sig\leftarrow Glia.sig-&\displaystyle \cfrac{2}{1+exp((Neuron.freq-0.1))}-1\\
-  &k=6\ln(3)
-  \label{eq:new}
+  sig\leftarrow sig-&\cfrac{2}{1-k\exp(Neuron.freq-0.01)}-1\\
+  \nonumber\therefore k=6\ln(3)
+  \label{eq:Sig}
 \end{align}
-ここで, NAの活動頻度とは以下のように求める.
-\begin{enumerate}
-  \item 活動頻度計算用変数$T$を用意する.
-  \item エージェント自身を含むクリークにおいて, 
-  smirnov-grubbs検定を行う.
-  \item 検定の結果, 自身が外れ値であると判断された場合に1, そうでなければ0を$T$に加算する.
-  \item 2〜3の工程をミニバッチ分繰り返す.
-  \item 以下の式を用いて, 自身の活動頻度が求まる.
-  \vspace{-2zh}
-  \begin{align}
-    Neuron.freq=\cfrac{T}{miniBatchSize}
-  \end{align}
-\end{enumerate} 
 \subsection{グリアネットワーク}
 \wsec{g-asem}節に述べた通り, 実際の脳ではミクログリアは単体で
 刈り込みを行っているのではなく, 
@@ -183,10 +191,10 @@ Glia-Agentは, Neuro-Agentと1対1で接続され, 内部変数$sig$を閾値に
 なお, 複数の距離が与えられた場合, 最も近い$GA$の影響を優先する.
 例えば, \wfig{GliaNetworks}の$g_2$の場合, 
 $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者の経路のみを考えることになる.
-\vspace{-3zh}
+\vspace{-2zh}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=8cm]{GliaNetworks.pdf}
+  \includegraphics[width=5cm]{GliaNetworks.pdf}
   \caption{グリアネットワークでの抑制信号の伝達}
   \label{fig:GliaNetworks}
 \end{figure}
