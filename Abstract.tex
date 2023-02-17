@@ -164,32 +164,33 @@ Neuro-Agentは刈り込み命令を受け取ると, 自身に接続された最�
 逆に, Neuro-Agentは自身の活動頻度$freq$を用いて, Glia-Agentの内部変数$sig$を更新する.
 この更新式は, \weq{sig}に示す通りである.
 \begin{align}
-  sig\leftarrow sig-&\cfrac{2}{1-6\ln(3)\exp(Neuron.freq-0.01)}-1
+  sig\leftarrow sig-&\cfrac{2}{1-6\ln(3)\exp(Neuro.freq-0.01)}-1
   \label{eq:sig}
 \end{align}
+\weq{sig}が示す等に, Neuro-Agentは自身の活動頻度$freq$が高ければ, $sig$を上げることで刈り込まれにくく, 
+逆に$freq$が0に近いほど$sig$を下げ刈り込み命令の発出を容易するようにフィードバックを行う.
 \subsection{グリアネットワーク}
-\wsec{g-asem}節に述べた通り, 実際の脳ではミクログリアは単体で
+実際の脳ではグリア細胞は単体で
 刈り込みを行っているのではなく, 
-グリアアセンブリを介して, 協調し全体としての利益に資する行動を
-とっているものと見られる.
+グリアアセンブリと呼ばれるグリア細胞同士のネットワークを介して, 
+協調し全体としての利益に資する行動をとっているものと見られる.
 
-本モデルはグリアアセンブリの模倣として$GA$同士のネットワークである
+本モデルはグリアアセンブリの模倣として$Glia-Agent$同士のネットワークである
 グリアネットワークを定義した.
-グリアネットワークは, 抑制信号$sig$を他の$GA$に伝播する.
+グリアネットワークは, 抑制信号$sig$を他の$Glia-Agent$に伝播する.
 これにより, 時空間的に局所的な刈り込みを抑制し, ネットワークの破綻を防ぐ役割がある.
 
 抑制信号は, グリアネットワーク上の伝播距離(ホップ数)に応じて減衰定数$A$だけ減衰していく.
-なお, 複数の距離が与えられた場合, 最も近い$GA$の影響を優先する.
+なお, 複数の距離が与えられた場合, 最も近い$Glia-Agent$の影響を優先する.
 例えば, \wfig{GliaNetworks}の$g_2$の場合, 
 $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者の経路のみを考えることになる.
-\vspace{-2zh}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=5cm]{GliaNetworks.pdf}
+  \includegraphics[width=4cm]{GliaNetworks.pdf}
   \caption{グリアネットワークでの抑制信号の伝達}
   \label{fig:GliaNetworks}
 \end{figure}
-\vspace{-4zh}
+\vspace{-3zh}
 \section{計算機実験}
 学習タスクとして6bitの入力の上位3bitのいずれかに1が入っているかどうか
 の判別を行った出力値は結果が真である確率である. 
