@@ -10,13 +10,17 @@
 \usepackage{comment}
 \usepackage{subfigure}
 \usepackage{amsmath}
-\renewcommand{\baselinestretch}{0.9}
+\usepackage{titlesec}
+ 
+ \titleformat*{\section}{\normalsize\bfseries}
+ \titleformat*{\subsection}{\small\bfseries}
+ \titleformat*{\subsubsection}{\small\bfseries}
+\renewcommand{\baselinestretch}{0.95}
 
 \renewcommand{\subfigtopskip}{5pt}	% 図の上の隙間。上図の副題と下図の間。
 \renewcommand{\subfigbottomskip}{0pt} % 図の下の隙間。副題と本題の間。
 \renewcommand{\subfigcapskip}{-6pt}	% 図と副題の間
 \renewcommand{\subcapsize}{\scriptsize} % 副題の文字の大きさ
-
 
 \makeatletter
 	\renewcommand{\theequation}{% 式番号の付け方
@@ -87,27 +91,28 @@
 その結果得たパラメータ差分のみを通信し, 平均化することで
 大規模な学習済みモデルを構築するため, プライバシーを含んだ学習データは各ノード内に保護される.
 機械学習への期待と世界的な個人情報保護の動きの高まりから, 
-将来的に連合学習は情報社会において重要な位置を占めることが予測される.
+将来的に連合学習は情報社会において重要な位置を占めることが期待される.
 
 一方, 連合学習の実用化に際しては, 
-従来, データセンターで動いていたモデルを計算資源に乏しいエッジ環境に投入する必要があることから
-少なくとも以下2点の課題が考えられる.
-1つ目は学習パラメータ削減によるモデルの軽量化, 
-2つ目は, エッジ環境内の不均一計算資源の利用
-である.
-前者は, PruningやNeural Architecture Search, 後者に対しては
-エージェントベース
-両者を満たしたモデルを構築できれば, 
-大規模なニューラルネットワークのエッジ環境への投入を可能にし, 
-かつ環境内の計算資源の利用率を最大化することが期待できるが,  
-両者を満たしたモデルに関する研究は著者の知る限り存在しない.
+従来, データセンターで動いていた大規模なモデルを
+計算資源に乏しいエッジ環境に投入し学習させる必要があることから,  
+以下2点のアプローチが重要となる.
+1つ目はモデルの軽量化, 
+2つ目は, ニューラルネットワークの自立分散化による環境内計算資源の利用の最大化である.
 
-そこで本研究では, 将来的に導入が予測されるエッジコンピューティングアーキテクチャ及び, 
-それに対応した機械学習手法である連合学習に向けて, 
-自律分散性を持ったニューラルネットワークのパラメータ削減を提案する(\wfig{ThisModel}).
+上述した2つの性質を併せ持つ
+モデルの産業導入は, 現在懸念されている
+エッジ環境の計算資源の乏しさという問題を緩和し, 
+連合学種の実用化に貢献すると思われるが, 
+両者の性質を満たすモデルに関する研究は著者の知る限り存在しない.
+
+そこで本研究では, 将来的に導入が予測されるエッジコンピューティング
+及びそれに対応した機械学習手法である連合学習に向けて, 
+自律分散性を持ったニューラルネットワークのパラメータ削減を提案(\wfig{ThisModel})する.
 提案にあたっては, 生体の脳における自律分散的なパラメータ削減である
 グリア細胞による神経回路の刈り込みに着目し, 
 神経免疫相互作用に基づくニューロンとグリアの相互調節機構をマルチエージェントシステムとして実装した.
+\vspace{-1.5zh}
 \begin{figure}[H]
   \centering
   \includegraphics[width=8cm]{ThisModel.pdf}
@@ -148,7 +153,7 @@
   シナプスの刈り込みを行い, パラメータ削減による学習の効率化・高速化を試みる. 
 
 \subsection{神経免疫相互作用に基づく相互調節モデル}
-次に, 具体的にGlia-AgentがNeuro-Agentに対して行う刈り込み命令の発出, 及び
+具体的にGlia-AgentがNeuro-Agentに対して行う刈り込み命令の発出, 及び
 Neuro-AgentからGlia-Agentへのフィードバックによる刈り込みの制御について説明する.
 
 Glia-AgentとNeuro-Agentは\wfig{NeuroGlia}に示すように, 1:1で接続され相互に調節を行う.
@@ -166,13 +171,17 @@ Neuro-Agentは刈り込み命令を受け取ると, 自身に接続された最�
 削除する.
 \subsubsection*{Neuro-AgentからGlia-Agentへの作用:$sig$の調節}
 逆に, Neuro-Agentは自身の活動頻度$freq_N$を用いて, Glia-Agentの内部変数$sig_G$を更新する.
-この更新式は, \weq{sig}に示す通りである.
+$sig_G$の更新式は\weq{sig}に示す通りである.
 \begin{align}
   sig_G\leftarrow sig_G-&\alpha\{\cfrac{2}{1-6\ln(3)\exp(freq_N-0.01)}-1\}
   \label{eq:sig}
 \end{align}
 \weq{sig}が示す等に, Neuro-Agentは自身の活動頻度$freq_N$が高ければ, $sig_G$を上げることで刈り込まれにくく, 
 逆に$freq_N$が0に近いほど$sig_G$を下げ刈り込み命令の発出を容易するようにフィードバックを行う.
+ここで, \begin{align}
+  freq_N=\frac{T}{miniBatchSize}
+  \label{eq:freq}
+\end{align}
 \subsection{グリアネットワーク}
 実際の脳ではグリア細胞は単体で
 刈り込みを行っているのではなく, 
@@ -188,23 +197,25 @@ Neuro-Agentは刈り込み命令を受け取ると, 自身に接続された最�
 なお, 複数の距離が与えられた場合, 最も近い$Glia-Agent$の影響を優先する.
 例えば, \wfig{GliaNetworks}の$g_2$の場合, 
 $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者の経路のみを考えることになる.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=5cm]{GliaNetworks.pdf}
   \caption{グリアネットワークでの抑制信号の伝達}
   \label{fig:GliaNetworks}
 \end{figure}
-\vspace{-7.8mm}
 \section{計算機実験}
 学習タスクとして6bitの入力の上位3bitのいずれかに1が入っているかどうか
 の判別を行った出力値は結果が真である確率である. 
 また, 初期ネットワーク構造はノード数が
 入力側から$6\rightarrow 8\rightarrow 8\rightarrow 8\rightarrow 1$の5層全結合ネットワークとした.
 その他のパラメータは以下に示す通りである(\wtab{param}).
+\vspace{-0.5cm}
 \begin{table}[H]
   \caption{パラメータ一覧}
   \label{tab:param}
   \centering
+  \scalebox{0.9}{
    \begin{tabular}{ll}
     \toprule
       パラメータ&値\\\midrule\midrule
@@ -220,6 +231,7 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
       フィードバックスケーリング$\alpha$&0.01\\
     \bottomrule
    \end{tabular}
+  }
  \end{table}
 計算機実験の結果を\wfig{SynapseNum},\wfig{LearningCurve}に示す.
 刈り込みを行った結果, 最終的なシナプス数は78に推移した.よって, 削減割合は
@@ -227,7 +239,7 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
 不要なシナプスの剪定が適切に行われたと評価できる.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=8cm]{Graph-crop.pdf} 
+  \includegraphics[width=7cm]{Graph-crop.pdf} 
   \caption{刈り込み後のネットワーク}
   \label{fig:Graph}
 \end{figure}
@@ -259,7 +271,7 @@ MASに特有な問題(合意制御, 環境認識), あるいは畳み込みのMA
  \begin{thebibliography}{99}
   \bibitem{DFL} 	
   Roy, Abhijit Guha, et al. "Braintorrent: A peer-to-peer environment for decentralized federated learning." arXiv preprint arXiv:1905.06731 (2019).
-  \bibitem{次数重み付き平均法}
-  原田和明, 右田剛史, and 高橋規一.``ニューラルネットワークの分散学習における新たな合意重み決定法.'' IEICE Conferences Archives. The Institute of Electronics, Information and Communication Engineers, 2019.
+  \bibitem{ADIPS}
+  藤田茂, et al. "分散処理システムのエージェント指向アーキテクチャ." 情報処理学会論文誌 37.5 (1996): 840-852.
 \end{thebibliography}
  \end{document}
