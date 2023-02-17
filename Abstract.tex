@@ -82,7 +82,7 @@
 データを集約せずにネットワークの端点(エッジ)で処理するエッジコンピューティングが注目
 されている.
 \end{comment}
-エッジコンピューティングでの機械学習手法として連合学習(Federareted Lerning)が提案されている.
+エッジコンピューティングでの機械学習手法として連合学習(Federareted Lerning)が提案されている\cite{DFL}.
 連合学習では, 学習データを集約せずネットワーク中の各ノードで学習し, 
 その結果得たパラメータ差分のみを通信し, 平均化することで
 大規模な学習済みモデルを構築するため, プライバシーを含んだ学習データは各ノード内に保護される.
@@ -95,6 +95,8 @@
 1つ目は学習パラメータ削減によるモデルの軽量化, 
 2つ目は, エッジ環境内の不均一計算資源の利用
 である.
+前者は, PruningやNeural Architecture Search, 後者に対しては
+エージェントベース
 両者を満たしたモデルを構築できれば, 
 大規模なニューラルネットワークのエッジ環境への投入を可能にし, 
 かつ環境内の計算資源の利用率を最大化することが期待できるが,  
@@ -188,11 +190,11 @@ Neuro-Agentは刈り込み命令を受け取ると, 自身に接続された最�
 $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者の経路のみを考えることになる.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=4cm]{GliaNetworks.pdf}
+  \includegraphics[width=5cm]{GliaNetworks.pdf}
   \caption{グリアネットワークでの抑制信号の伝達}
   \label{fig:GliaNetworks}
 \end{figure}
-\vspace{-3zh}
+\vspace{-7.8mm}
 \section{計算機実験}
 学習タスクとして6bitの入力の上位3bitのいずれかに1が入っているかどうか
 の判別を行った出力値は結果が真である確率である. 
@@ -255,10 +257,8 @@ MASに特有な問題(合意制御, 環境認識), あるいは畳み込みのMA
 実用化にあたっては
 さらなる発展が必要である.
  \begin{thebibliography}{99}
-  \bibitem{Neuron-Glia} 	
-野村靖幸,北海道大学,神経免疫相関とくにニューロン・グリア相互作用機構に関する分子薬理学的研究, \url{https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-06454595/}
-  \bibitem{Tensorizing}
-  Novikov, Alexander, et al. "Tensorizing neural networks." Advances in neural information processing systems 28 (2015).
+  \bibitem{DFL} 	
+  Roy, Abhijit Guha, et al. "Braintorrent: A peer-to-peer environment for decentralized federated learning." arXiv preprint arXiv:1905.06731 (2019).
   \bibitem{次数重み付き平均法}
   原田和明, 右田剛史, and 高橋規一.``ニューラルネットワークの分散学習における新たな合意重み決定法.'' IEICE Conferences Archives. The Institute of Electronics, Information and Communication Engineers, 2019.
 \end{thebibliography}
