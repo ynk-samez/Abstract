@@ -35,6 +35,23 @@
 %\numberwithin{figure}{section}
 
 
+% 数式(演算子など)のスペースを詰める
+% =,→ 間の余白
+\thickmuskip=1.0\thickmuskip
+% +,- 間の余白
+\medmuskip=0.8\medmuskip
+% … などの装飾記号の余白
+\thinmuskip=0.8\thinmuskip
+% 行列を詰める
+\arraycolsep=0.3\arraycolsep
+% 数式の上下のスペースの変更
+\AtBeginDocument{
+  \abovedisplayskip     =0.5\abovedisplayskip
+  \abovedisplayshortskip=0.5\abovedisplayshortskip
+  \belowdisplayskip     =0.5\belowdisplayskip
+  \belowdisplayshortskip=0.5\belowdisplayshortskip}
+
+
 \boldmaintrue% 主文を太字にするモード(指導教員添削時はこちら)
 %\boldmainfalse% 主文を普通文字にするモード(抄録印刷時はこちら)
 \graphicspath{{./figs}}
@@ -84,7 +101,7 @@
 
 そこで本研究では, 将来的に導入が予測されるエッジコンピューティングアーキテクチャ及び, 
 それに対応した機械学習手法である連合学習に向けて, 
-自律分散性を持ったニューラルネットワークのパラメータ削減を提案する\wfig{ThisModel}.
+自律分散性を持ったニューラルネットワークのパラメータ削減を提案する(\wfig{ThisModel}).
 提案にあたっては, 生体の脳における自律分散的なパラメータ削減である
 グリア細胞による神経回路の刈り込みに着目し, 
 神経免疫相互作用に基づくニューロンとグリアの相互調節機構をマルチエージェントシステムとして実装した.
@@ -106,6 +123,7 @@
   内部変数$b$を持ち, 
   これを処理して別のNeuro-Agentに情報を送信するための出力$y$を生成する.
   この時の内部処理は, \weq{Neuro-Agent}に示す通り, 標準的な人工ニューロンと同等である.
+  \
   \begin{align}
     y=\phi(\sum_{i=1}^m x_i+b)
     \label{eq:Neuro-Agent}
