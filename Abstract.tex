@@ -8,10 +8,14 @@
 \usepackage{remreset}
 \usepackage{pdfpages}
 \usepackage{comment}
-\usepackage{geometry}
-\renewcommand{\baselinestretch}{0.90}
-%\usepackage[top=2cm, bottom=2cm, left=1cm, right=1cm]{geometry}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{amsmath}
 
+\renewcommand{\subfigtopskip}{2pt}	% 図の上の隙間。上図の副題と下図の間。
+\renewcommand{\subfigbottomskip}{0pt} % 図の下の隙間。副題と本題の間。
+\renewcommand{\subfigcapskip}{-10pt}	% 図と副題の間
+\renewcommand{\subcapsize}{\scriptsize} % 副題の文字の大きさ
 
 \makeatletter
 	\renewcommand{\theequation}{% 式番号の付け方
@@ -62,7 +66,7 @@
 \end{comment}
 エッジコンピューティングでの機械学習手法として連合学習(Federareted Lerning)が提案されている.
 連合学習では, 学習データを集約せずネットワーク中の各ノードで学習し, 
-その結果得たパラメータ差分のみを通信することによって
+その結果得たパラメータ差分のみを通信し, 平均化することで
 大規模な学習済みモデルを構築するため, プライバシーを含んだ学習データは保護される.
 機械学習への期待と世界的な個人情報保護の動きの高まりから, 
 将来的に連合学習は情報社会において重要な位置を占めることが予測される.
@@ -84,59 +88,68 @@
 そこで本研究では, 将来的に導入が予測されるエッジコンピューティングアーキテクチャ及び, 
 それに対応した機械学習手法である連合学習に向けて, 
 自律分散性を持ったニューラルネットワークのパラメータ削減を提案する.
-具体的に, 自律分散的なパラメータ削減のとして生体の脳で行われるグリア細胞によるシナプスの刈り込みに
-着目し, これに関与する細胞をモデル化したエージェントを投入したマルチエージェントシステムを実装した.
-\section{生物学的背景}
-\subsection{神経免疫相互作用}
-神経系と免疫系は独立したシステムではなく相互に調節を行い, 人体の恒常性を維持している
-ことが知られている.
-これは神経免疫相互作用(Neuroimmanue Interaction)と呼ばれ, 
-古くから経験的に知られていたストレスと疾患の関係の医学的な証左である.
-殊に脳内においては神経系をニューロン, 免疫系をミクログリアと呼ばれる中枢神経系グリア細胞が司っており, 
-グリア--ニューロン間においても神経免疫相互作用が認められている\cite{Neuron-Glia}.
-
-またミクログリアは, 脳の発達において重要な役割を果たす
-シナプスの刈り込みを担当する.
-特に, 霊長類の大脳皮質では
-生後直後からシナプス数が急速に増大し, 小児期に最大値に達したのち, 
-刈り込みが行われ減少していくオーバーシュート型シナプス形成と呼ばれる特徴的なシナプスリモデリングが行われる.
-このシナプス形成の刈り込み段階において, 
-統合失調症では通常よりも多く行われ, ASDでは通常よりも少なく行われることが
-確認されており, シナプスの刈り込みが脳の高次機能の維持・発現の要因である可能性が示唆される。
-\subsection{グリアアセンブリ}
-\label{sec:g-asem}
-生体の脳は神経細胞とグリア細胞によって構成される.
-グリア細胞とは脳内細胞のうち神経細胞以外を指し, 
-ミクログリア(microglia), アストロサイト(astrocyte),
-オリゴデンドロサイト(oligodendrocyte)の三種が大多数を占める.
-グリア細胞の役割は神経細胞への栄養運搬, 血流の制御, 電気信号の速度制御, 免疫等
-多岐にわたるが, 巨大なグリア細胞同士のネットワーク 
----グリアアセンブリ(Glia Assembly)--- 
-が確認されており, 異種グリア細胞が互いに協調し合いながら, 
-脳の機能維持を行っていること知られている.
+提案にあたっては, 生体の脳における自律分散的なパラメータ削減である
+グリア細胞による神経回路の刈り込みに着目し, 
+神経免疫相互作用に基づくニューロンとグリアの相互調節機構をマルチエージェントシステムとして実装した.
 \section{提案モデル}
+\subsection{マルチエージェントシステムによるニューラルネットワーク}
+本モデルでは, ニューラルネットワークをNeuro-AgentとSynapse-Agentという
+2種のエージェントからなるマルチエージェントシステムとして構築している. 
+以下, それぞれの役割について説明する.
+\begin{description}
+  \item[Neuro-Agent]
+  神経細胞をモデル化したエージェントであり, 情報の受容, 処理, 
+  転送などを担当する.
+  それぞれのNeuro-Agentは, 情報を受け取るための複数の入力$x_i$ $\;(i= 1, 2, 3, \cdots m)$と, 
+  内部変数$b$を持ち, 
+  これを処理して別のNeuro-Agentに情報を送信するための出力$y$を生成する.
+  この時の内部処理は, \weq{Neuro-Agent}に示す通り, 標準的な人工ニューロンと同等である.
+  \begin{align}
+    y=f(\sum_{i=1}^m x_i+b)
+    \label{eq:Neuro-Agent}
+  \end{align}
+  \item[Synapse-Agent]神経回路における接触構造であるシナプスをモデル化したエージェントであり, 
+  Neuro-Agent間の情報の伝達を担当する.
+  それぞれのSynapse-Agentは, 入力$u$を受け取り, それを変換した値$v$を出力する(\weq{Synapse-Agent}). 
+  この出力は別のNeuro-Agentの入力として使用される.
+  \begin{align}
+    v=weight\cdot u
+ \label{eq:Synapse-Agent}   
+  \end{align}
+  ここで, 式中の$weight$は, そのSynapse-Agentの重みを示し, 
+  主にこれを誤差逆伝播法を用いて更新することで, ニューラルネットワークが学習される.
+\end{description}
 \subsection{神経免疫相互作用に基づく相互調節モデル}
-本提案モデルはニューロン, シナプス, グリアを
-モデル化したNeuro-Agent(NA), Synapse-Agent(SA), Glia-Agent($GA$)
-の3種のエージェントによる
-マルチエージェントシステムである.
-このうち, NAとSAによる相互作用は従来のニューラルネットワークと
-等価なシステムであるので省略し, 本節では$GA$---NA間の相互調節モデル(\wfig{NeuroGlia})について述べる.
-\vspace{-2zh}
+Neuro-Agent, Synapse-Agentに続く第三のエージェントとしてニューラルネットワーク中の不要なSynapse-Agentの刈り込みを行うGlia-Agentを導入する. 
+Glia-Agentは生体の脳内においてシナプスの刈り込みを行う
+脳内免疫系を司るミクログリア, 及びミクログリア(microglia)の機能を中心に
+中枢神経系グリア細胞の機能をモデル化したエージェントである.
+
+Glia-Agentは, Neuro-Agentと1対1で接続され, 内部変数$sig$を閾値に用いて, 
+確率的にNeuro-Agentに刈り込み指令を発出する. 
+逆に, Neuro-Agentは自身の活動頻度$freq$を用いて, $sig$を調節するフィードバック
+を行う.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6cm]{NeuroGlia.pdf}
-  \caption{Neuro-AgentとGlia-Agentの接続}
-  \label{fig:NeuroGlia}
+  \includegraphics[width=8cm]{NewNeuroGlia.pdf} 
+  \caption{Neuro-Glia相互調節機構} 
 \end{figure}
-\vspace{-2zh}
-$GA$の役割は, ニューラルネットワークのシナプスの刈り込みである. 
-$GA$は内部で乱数を生成し, 内部変数$sig$を閾値に用いた条件分岐を行う.
-乱数が閾値を超えた場合には, 自身に1対1に対応したNAに接続された最も重みの小さな
-SAを刈り込む. 
-また, 刈り込み指令を出した$GA$は内部変数$sig$を$1.0$に更新する.
-逆にNAは自身の活動頻度$freq$を用いた式(\weq{new})で$sig$を調節更新する.
 
+\begin{comment}
+\begin{figure}[H]
+  \begin{minipage}{0.5\hsize}
+    \centering
+    \includegraphics{FlowChartGN.pdf}
+    \subcaption{Glia-AgentからNeuro-Agentへの作用:刈り込み}
+  \end{minipage}
+  \begin{minipage}{0.5\hsize}
+    \centering
+    \includegraphics{FlowChartNG.pdf}
+    \subcaption{Neuro-AgentからGlia-Agentへの作用:閾値の調節}
+  \end{minipage}
+  \caption{キャプション}
+\end{figure}
+\end{comment}
 \begin{align}
   Glia.sig\leftarrow Glia.sig-&\displaystyle \cfrac{2}{1+exp((Neuron.freq-0.1))}-1\\
   &k=6\ln(3)
@@ -189,7 +202,7 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
    \begin{tabular}{ll}
     \toprule
       パラメータ&値\\\midrule\midrule
-      学習率$\eta$&$0.01$\\
+      学習率$\eta$&$0.5$\\
       エポック数$Epocs$&$100$\\
       ミニバッチサイズ$miniBatchSize$&$100$\\
       初期ニューロン数$Neurons$&$31$\\
@@ -202,6 +215,9 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
    \end{tabular}
  \end{table}
 計算機実験の結果を\wfig{SynapseNum},\wfig{LearningCurve}に示す.
+刈り込みを行った結果, 最終的なシナプス数は78に推移した.よって, 削減割合は
+57％であり, また, \wfig{LearningCurve}より刈り込みによる精度悪化は認められないため, 
+不要なシナプスの剪定が適切に行われたと評価できる.
 \begin{figure}[H]
   \centering
   \includegraphics[width=8cm]{Graph-crop.pdf} 
