@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  17 FEB 2023 18:29
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  17 FEB 2023 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,18 +369,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 173.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 184.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 173.
+(Font)              scaled to size 8.64899pt on input line 184.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 173.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 184.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.87105pt on input line 173.
+(Font)              scaled to size 8.87105pt on input line 184.
 
-LaTeX Warning: Reference `eq:Sig' on page 2 undefined on input line 173.
-
-
-LaTeX Warning: Reference `sec:g-asem' on page 2 undefined on input line 180.
+LaTeX Warning: Reference `sec:g-asem' on page 2 undefined on input line 184.
 
 File: ./figs//GliaNetworks.pdf Graphic file (type pdf)
 <./figs//GliaNetworks.pdf>
@@ -391,7 +388,7 @@ File: ./figs//SynapseNum-crop.pdf Graphic file (type pdf)
 File: ./figs//LearningCurve-crop.pdf Graphic file (type pdf)
 <./figs//LearningCurve-crop.pdf>
 [2]
-Underfull \hbox (badness 1107) in paragraph at lines 262--263
+Underfull \hbox (badness 1107) in paragraph at lines 266--267
 []\JY1/mc/m/n/9 野村靖幸\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 北海道大学\OT1/cmr/m/n/9 , \JY1/mc/m/n/9 神経免疫相関とくにニ
  []
 
@@ -405,10 +402,10 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  4392 strings out of 478724
  69653 string characters out of 5858391
- 391477 words of memory out of 5000000
+ 392487 words of memory out of 5000000
  22763 multiletter control sequences out of 15000+600000
  480388 words of font info for 74 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  70i,10n,76p,267b,327s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (3 pages, 16340 bytes).
+Output written on Abstract.dvi (3 pages, 16440 bytes).

@@ -126,7 +126,7 @@
   主にこれを誤差逆伝播法を用いて更新することで, ニューラルネットワークが学習される.
 \end{description}
 \end{comment}
-\subsection{神経免疫相互作用に基づく相互調節モデル}
+\subsection{複数のエージェントシステムによるニューラルネットワーク}
 本提案は, 細胞間ネットワークとしての生体システムの模倣及び, 
 自律分散性の保証といった観点からマルチエージェントシステムとして解釈・実装している.  
 以下, 投入するエージェントについて説明する.
@@ -156,6 +156,7 @@
   Glia-Agentは, Neuro-AgentとSynapse-Agentによって構成されるニューラルネットワークに対して,
   シナプスの刈り込みを行い, パラメータ削減による学習の効率化・高速化を試みる. 
 \end{description}
+\subsection{神経免疫相互作用に基づく相互調節モデル}
 次に, 具体的にGlia-AgentがNeuro-Agentに対して行う刈り込み命令の発出, 及び
 Neuro-AgentからGlia-Agentへのフィードバックによる刈り込みの制御について説明する.
 
@@ -170,11 +171,14 @@ Glia-AgentからNeuro-Agentに対して行う作用;
 シナプスの刈り込み命令はGlia-Agentの内部変数$sig$
 を閾値に用いて確率的に実行する.
 逆に, Neuro-Agentは自身の活動頻度$freq$を用いて, Glia-Agentの内部変数$sig$を更新する.
-この更新式は, \weq{Sig}に示す通りである.
+この更新式は, \weq{sig}に示す通りである.
 \begin{align}
-  sig\leftarrow sig-&\cfrac{2}{1-k\exp(Neuron.freq-0.01)}-1\\
-  \nonumber\therefore k=6\ln(3)
-  \label{eq:Sig}
+  sig\leftarrow sig-&\cfrac{2}{1-k\exp(Neuron.freq-0.01)}-1
+  \label{eq:sig}
+\end{align}
+\begin{align}
+  \nonumber 
+  k=6\ln(3)
 \end{align}
 \subsection{グリアネットワーク}
 \wsec{g-asem}節に述べた通り, 実際の脳ではミクログリアは単体で
