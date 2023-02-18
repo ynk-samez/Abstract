@@ -15,7 +15,7 @@
  \titleformat*{\section}{\normalsize\bfseries}
  \titleformat*{\subsection}{\small\bfseries}
  \titleformat*{\subsubsection}{\small\bfseries}
-\renewcommand{\baselinestretch}{0.95}
+\renewcommand{\baselinestretch}{1}
 
 \renewcommand{\subfigtopskip}{5pt}	% 図の上の隙間。上図の副題と下図の間。
 \renewcommand{\subfigbottomskip}{0pt} % 図の下の隙間。副題と本題の間。
@@ -136,7 +136,6 @@
     y=\phi(\sum_{i=1}^m x_i+b)
     \label{eq:Neuro-Agent}
   \end{align}
-  なお, 本モデルにおいては活性関数にシグモイドを採用している.
   \subsubsection*{●Synapse-Agent}
   神経回路における接触構造であるシナプスをモデル化したエージェントであり, 
   Neuro-Agent間の情報の伝達を担当する.
@@ -153,10 +152,13 @@
   シナプスの刈り込みを行い, パラメータ削減による学習の効率化・高速化を試みる. 
 
 \subsection{神経免疫相互作用に基づく相互調節モデル}
-具体的にGlia-AgentがNeuro-Agentに対して行う刈り込み命令の発出, 及び
-Neuro-AgentからGlia-Agentへのフィードバックによる刈り込みの制御について説明する.
+神経系と免疫系は独立したシステムではなく互いに制御しながら恒常性を維持しており, 
+これを神経免疫相互作用(Neuroimmune Interaction)と呼ぶ.
 
+本モデルはシナプス形成におけるグリア--神経細胞間の神経免疫相互作用に着想を得ており,
+神経細胞からのシグナル伝達に拠ってグリア細胞が神経回路の刈り込みを行う様子をモデル化したものである.
 Glia-AgentとNeuro-Agentは\wfig{NeuroGlia}に示すように, 1:1で接続され相互に調節を行う.
+\vspace{-2zh}
 \begin{figure}[H]
   \centering
   \includegraphics[width=7cm]{NeuroGlia.pdf}  
@@ -234,8 +236,9 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
   }
  \end{table}
 計算機実験の結果を\wfig{SynapseNum},\wfig{LearningCurve}に示す.
-刈り込みを行った結果, 最終的なシナプス数は78に推移した.よって, 削減割合は
-57％であり, また, \wfig{LearningCurve}より刈り込みによる精度悪化は認められないため, 
+刈り込みを行った結果, 最終的なシナプス数は72に推移した.
+拠って, 削減されたSynapse-Agentの割合は60％であり, 
+また\wfig{LearningCurve}より刈り込みによる精度悪化は認められないため, 
 不要なシナプスの剪定が適切に行われたと評価できる.
 \begin{figure}[H]
   \centering
@@ -257,7 +260,6 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
   \caption{学習曲線}
   \label{fig:LearningCurve}
 \end{figure}
- 
 \section{結論}
 グリア細胞に着想を得た監視エージェントを導入することによって
 全体の管理者のいないMASに対応した
