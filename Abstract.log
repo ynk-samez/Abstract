@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  18 FEB 2023 22:31
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  19 FEB 2023 14:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -386,20 +386,18 @@ Overfull \hbox (22.76224pt too wide) in paragraph at lines 172--173
 ]
 File: ./figs//GliaNetworks.pdf Graphic file (type pdf)
 <./figs//GliaNetworks.pdf>
-File: ./figs//LearningCurve-crop.pdf Graphic file (type pdf)
-<./figs//LearningCurve-crop.pdf>
-File: ./figs//SynapseNum-crop.pdf Graphic file (type pdf)
-<./figs//SynapseNum-crop.pdf>
 File: ./figs//Graph-crop.pdf Graphic file (type pdf)
 <./figs//Graph-crop.pdf>
+File: ./figs//Subploting-crop.pdf Graphic file (type pdf)
+<./figs//Subploting-crop.pdf>
 [2] (./Abstract.aux) ) 
 Here is how much of TeX's memory you used:
- 4791 strings out of 478724
- 75468 string characters out of 5858391
- 402032 words of memory out of 5000000
- 23140 multiletter control sequences out of 15000+600000
+ 4784 strings out of 478724
+ 75248 string characters out of 5858391
+ 402022 words of memory out of 5000000
+ 23134 multiletter control sequences out of 15000+600000
  482572 words of font info for 84 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  70i,12n,76p,253b,336s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (2 pages, 18256 bytes).
+Output written on Abstract.dvi (2 pages, 18004 bytes).

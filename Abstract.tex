@@ -252,28 +252,23 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
    \end{tabular}
   }
  \end{table}
-計算機実験の結果得られた学習曲線及びシナプス数の変化及び, 刈り込み後のネットワークを\wfig{LearningCurve}, 
+計算機実験の結果得られた学習曲線及びシナプス数の変化及び, 刈り込み後のネットワークを
 \wfig{SynapseNum}及び\wfig{Graph}に示す.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=8cm]{LearningCurve-crop.pdf} 
+  \includegraphics[width=8cm]{Graph-crop.pdf} 
   \caption{学習曲線}
-  \label{fig:LearningCurve}
+  \label{fig:Graph}
 \end{figure}
 \vspace{-2zh}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=8cm]{SynapseNum-crop.pdf} 
-  \caption{シナプス量の変化}
+  \includegraphics[width=8cm]{Subploting-crop.pdf} 
+  \caption{シナプス量の変化と学習曲線}
   \label{fig:SynapseNum}
 \end{figure}
 \vspace{-2zh}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=7cm]{Graph-crop.pdf} 
-  \caption{刈り込み後のネットワーク}
-  \label{fig:Graph}
-\end{figure}
+
 Glia-Agent及びグリアネットワークによる刈り込みを実行した結果, 最終的なシナプス数は$182$から$72$に推移した. 
 また, この時の学習曲線は刈り込みを行わない場合と比較してほとんど同一の曲線を描き, 
 精度の悪化が認められない.
