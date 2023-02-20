@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  21 FEB 2023 02:22
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  21 FEB 2023 04:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -272,7 +272,12 @@ File: l3backend-dvipdfmx.def 2022-02-07 L3 backend support: dvipdfmx
 \g__pdf_backend_object_int=\count293
 \g__pdf_backend_annotation_int=\count294
 \g__pdf_backend_link_int=\count295
-) (./Abstract.aux)
+)
+
+LaTeX Warning: Unused global option(s):
+    [10.5pt].
+
+(./Abstract.aux)
 \openout1 = `Abstract.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
@@ -302,24 +307,24 @@ LaTeX Font Info:    ... okay on input line 70.
 * modes: 
 * h-part:(L,W,R)=(56.90552pt, 483.69684pt, 56.90552pt)
 * v-part:(T,H,B)=(56.9055pt, 717.00945pt, 71.1319pt)
-* \paperwidth=545.52084pt
-* \paperheight=771.51398pt
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
 * \textwidth=483.69684pt
 * \textheight=717.00945pt
 * \oddsidemargin=-15.36447pt
 * \evensidemargin=-15.36447pt
-* \topmargin=-53.77347pt
+* \topmargin=-51.06168pt
 * \headheight=20.0pt
-* \headsep=18.40898pt
+* \headsep=15.69719pt
 * \topskip=12.76073pt
-* \footskip=31.16971pt
-* \marginparwidth=36.98749pt
+* \footskip=28.45792pt
+* \marginparwidth=27.74062pt
 * \marginparsep=18.49374pt
 * \columnsep=17.07172pt
 * \skip\footins=16.0pt plus 5.0pt minus 2.0pt
-* \hoffset=-6.87735pt
-* \voffset=-6.87735pt
-* \mag=913
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
 * \@twocolumntrue
 * \@twosidefalse
 * \@mparswitchfalse
@@ -357,26 +362,22 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 7.88538pt on input line 130.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.91403pt on input line 136.
+(Font)              scaled to size 5.91403pt on input line 139.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.92836pt on input line 136.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 136.
+(Font)              scaled to size 4.92836pt on input line 139.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 139.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 136.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 139.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \vbox (badness 1509) has occurred while \output is active []
-
-File: ./figs//NewDeal.pdf Graphic file (type pdf)
-<./figs//NewDeal.pdf>
-
-Overfull \hbox (22.76224pt too wide) in paragraph at lines 171--172
- [][] 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [1
 
@@ -390,12 +391,12 @@ File: ./figs//Subploting-crop.pdf Graphic file (type pdf)
 <./figs//Subploting-crop.pdf>
 [2] (./Abstract.aux) ) 
 Here is how much of TeX's memory you used:
- 4777 strings out of 478724
- 75086 string characters out of 5858391
- 403012 words of memory out of 5000000
- 23128 multiletter control sequences out of 15000+600000
+ 4774 strings out of 478724
+ 75007 string characters out of 5858391
+ 402101 words of memory out of 5000000
+ 23126 multiletter control sequences out of 15000+600000
  482572 words of font info for 84 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 70i,12n,76p,253b,336s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 70i,12n,76p,253b,334s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (2 pages, 18876 bytes).
+Output written on Abstract.dvi (2 pages, 19024 bytes).

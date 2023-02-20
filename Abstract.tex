@@ -1,4 +1,4 @@
-\documentclass[a4paper, 9pt,twocolumn,dvipdfmx]{jsarticle}
+\documentclass[a4paper, 10.5pt,twocolumn,dvipdfmx]{jsarticle}
 
 %\usepackage[a4paper,top=10truemm,bottom=10truemm,left=1truemm,right=1truemm]{geometry}
 \usepackage{amsmath}
@@ -22,7 +22,7 @@
 \titleformat*{\section}{\normalsize\bfseries}
 \titleformat*{\subsection}{\small\bfseries}
 \titleformat*{\subsubsection}{\small\bfseries}
-\renewcommand{\baselinestretch}{0.945}
+\renewcommand{\baselinestretch}{1.0}
 
 \renewcommand{\subfigtopskip}{1pt}	% 図の上の隙間。上図の副題と下図の間。
 \renewcommand{\subfigbottomskip}{0pt} % 図の下の隙間。副題と本題の間。
@@ -127,91 +127,87 @@ EUの一般データ保護規則をはじめとして世界各国が巨大IT企�
 そこで本研究では, モデルの軽量化および分散化を兼ね備えたモデルを構成することを目的に, 
 神経免疫相互作用を考慮した複数の自律行動主体(エージェント)で構成されるニューラルネットワークを検討を行う.
 \section{提案モデル}
-\subsection{複数のエージェントによるニューラルネットワーク}
-本提案は, 
+\subsection{複数のエージェントで構成されるニューラルネットワーク}
+本提案はモデルを構成する個々のユニットを自律行動主体(エージェント)として解釈しており, 
+具体的には, 情報の変換を行うNeuro-Agent, Neuro-Agent間の情報の伝達を担うSynapse-Agent, 
+それらによって構成されるニューラルネットワークに対して不要なシナプスの刈り込みを行うGlia-Agent
+によって構成されている.以下, それぞれについて説明する.
 \vspace{2mm}
-  \subsubsection*{● Neuro-Agent;\,\,}
+  \subsubsection*{● Neuro-Agent;\,\,NA}
   神経細胞をモデル化したエージェントであり, 情報の受容, 処理, 
   転送などを担当する.
-  それぞれのNeuro-Agentは, 情報を受け取るための複数の入力$x_i$ $\;(i= 1, 2, 3, \cdots m)$と, 
-  内部変数$b$を持ち, 
-  これを処理して別のNeuro-Agentに情報を送信するための出力$y$を生成する.
+  それぞれのNeuro-Agent(以降, NA)は, 情報を受け取るための複数の入力$x_i$ $\;(i= 1, 2, 3, \cdots m)$と, 
+  バイアス$b$を持ち, 
+  これを処理して別のNAに情報を送信するための出力$y$を生成する.
   この時の内部処理は\weq{Neuro-Agent}に示す通り, 
   標準的な人工ニューロンと同等に活性化関数$\phi$を用いた変換である.
   \begin{align}
     y=\phi(\sum_{i=1}^m x_i+b)
     \label{eq:Neuro-Agent}
   \end{align}
-  \subsubsection*{●Synapse-Agent;\,\,}
+  \subsubsection*{●Synapse-Agent;\,\,SA}
   神経回路における接触構造であるシナプスをモデル化したエージェントであり, 
-  Neuro-Agent間の情報の伝達を担当する.
-  それぞれのSynapse-Agentは, 入力$u$を受け取り, それを変換した値$v$を出力する(\weq{Synapse-Agent}). 
-  この出力は別のNeuro-Agentの入力$x_i, i\in\mathbb{N}^+$として使用される.
+  NA間の情報の伝達を担当する.
+  それぞれのSynapse-Agent(以降SA)は, NAからの出力$y$を受け取り, それを変換した値$x$を出力する(\weq{Synapse-Agent}). 
+  この出力は別のNAの入力として使用される.
   \begin{align}
     x=w\cdot y
  \label{eq:Synapse-Agent}   
   \end{align}
-  ここで, 式中の$w$は, そのSynapse-Agentの重みを示し, 
-  これとNeuro-Agentの内部変数$b$を誤差逆伝播法を用いて更新することで, ニューラルネットワークが学習される.
+  ここで, 式中の$w$は, そのSAの重みを示し, 
+  これとNAのバイアス$b$について出力の誤差に対する責任を計算することで学習を行う(誤差逆伝播法).
   \vspace{2mm}
-  \subsubsection*{●Glia-Agent;\,\,}
-  神経細胞の補助細胞であるグリア細胞(Glia-Cell)の機能を模倣したエージェント.
-  Glia-Agentは, Neuro-AgentとSynapse-Agentによって構成されるニューラルネットワークに対して,
-  シナプスの刈り込みを行い, パラメータ削減による学習の効率化・高速化を試みる. 
+  \subsubsection*{●Glia-Agent;\,\,GA}
+  神経細胞の補助細胞であるグリア細胞の機能を模倣したエージェント. 
+  Glia-Agent(以降GA)は, NAと1:1で接続され, この接続を介して, 
+  NAとSAで構成されるニューラルネットワーク中の不要なシナプスの刈り込みを試みる.
   \vspace{2mm}
 \subsection{神経免疫相互作用に基づく相互調節モデル}
-神経系と免疫系は独立したシステムではなく
-神経免疫相互作用(Neuroimmune Interaction)と呼ばれる相互調節機構を持つ.
-殊に生体の脳機能発達においては, 神経細胞からのシグナル伝達に拠って
-グリア細胞(microglia)が神経回路の刈り込みを行うことが確認されている.
-本モデルではこれをNeuro-AgentとGlia-Agent間の相互作用として組み込んだ.
-\vspace{-5mm}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=9cm]{NewDeal.pdf}  
-  \caption{Neuro-Glia相互調節機構}
-  \label{fig:NeuroGlia}
-\end{figure}
-\vspace{-5mm}
-\wfig{NeuroGlia}に示すようにGlia-AgentとNeuro-Agentは1:1で接続され, 
- 適宜Glia-Agentの内部変数$sig$を更新していくことで刈り込みの制御を行う.
- \vspace{1mm}
-\subsubsection*{Glia-AgentからNeuro-Agentへの作用\,\,:\,\,刈り込み命令の発出}
-シナプスの刈り込み命令はGlia-Agentの内部変数$sig$
+グリア細胞の一種で脳内免疫細胞であるmicrogliaは, 抗原提示や貪食といった役割のほかに,  
+シナプス形成における神経回路の刈り込みの実行者という側面を持つ. 
+このようなmicrogliaの作用に対し, 
+神経細胞はcytokine, chemokine, 核酸などのシグナル伝達物質を産生することで, 
+能動的にmicrogliaを制御することが知られている. 
+本モデルではこの脳内における細胞間の神経免疫相互作用(Neuroimmune Interaction)を模倣し, 
+Neuro-AgentとGlia-Agent間の相互作用として組み込んだものである. 
+以下, 落とし込んだそれぞれのアルゴリズムを説明する.
+\vspace{2mm}
+\subsubsection{GAからNAへの作用\,\,:\,\,刈り込み命令}
+シナプスの刈り込み命令はGAの内部変数$sig$
 を閾値に用いて確率的に実行される.
-Neuro-Agentは刈り込み命令を受け取ると, 自身に接続された最も重みが0に近いSynapse-Agentを
+NAは刈り込み命令を受け取ると, 自身に接続された最も重みが0に近いSAを
 削除する.
-また, 刈り込み指令を発出したGlia-Agentは
+また, 刈り込み指令を発出したGAは
 $sig=1.0$に更新し, グリアネットワークへの伝播を行う.
 詳しくは2.3節で述べるが, これに拠って時空間的に集中した過度な刈り込みが抑制される.
-\subsubsection*{Neuro-AgentからGlia-Agentへの作用\,\,:\,\,$sig$の更新}
-Neuro-Agentはまず, $miniBatchSize$の間に
+
+\vspace{2mm}
+\subsubsection{NAからGAへの作用\,\,:\,\,$sig$の更新}
+Neuro-Agentはまず, データ数$miniBatchSize$の間に
 隣接するNeuro-Agentの出力値と比較し, 自分が外れ値であった回数を変数$cnt$にカウントする.
-次に, $cnt$を用いて自身の活動頻度$freq$を計算する.
+次に, $cnt$を用いて自身の活動頻度$f$を計算する.
 \begin{align}
-  freq=\displaystyle\frac{cnt}{miniBatchSize}
+  f=\displaystyle\frac{cnt}{miniBatchSize}
 \end{align}
-最後に$freq$を用いて, Glia-Agentの内部変数$sig$を更新する.
+最後に$f$を用いて, GAの内部変数$sig$を更新する.
 $sig$の更新式は\weq{sig}に示す通りである. 
 ただし, わかりやすさのため式中でGlia-Agentのプロパティには$G$, 及び
-Neuro-Agentのプロパティには$N$の添字を付してある.
+NAのプロパティには$N$の添字を付してある.
 \begin{align}
   sig_G\leftarrow sig_G-&\alpha\left[\cfrac{2}{1-\beta\exp(freq_N-0.01)}-1\right]
   \label{eq:sig}
 \end{align}
-\weq{sig}は, Neuro-Agentの活動頻度$freq$が高いほど刈り込みを抑制し, 逆に$freq$が小さいほど
+\weq{sig}は, NAの活動頻度$f$が高いほど刈り込みを抑制し, 逆に$f$が小さいほど
 刈り込みがされやすくなるように$sig$を更新する.
 \subsection{グリアネットワークによる過度な刈り込みの抑制}
-ASDや統合失調症などの神経免疫疾患の報告からシナプスの刈り込みが脳の高次機能維持・発現の要因である可能性が示唆されている.
-これは同時に, グリア細胞による過度な刈り込みを抑制するシステムの存在が仮定するものであり医学的解明が急がれる.
 我々はこのシステムの在処として, グリア細胞同士のネットワークであるグリアアセンブリ(Glia-Assembly)
-であると仮定し, あるGlia-Agentが刈り込み指令を下した際に, 
-そのエージェントの$sig$を他のGlia-Agentに伝達し影響させ過度な刈り込みを抑制させる
-Glia-Agent同士のネットワーク; グリアネットワークを模倣・実装した.
-グリアネットワーク上において$sig$は伝播距離(ホップ数)に応じて減衰定数$A$だけ減衰していく.
-なお, 複数の距離が与えられた場合, 最も近い$Glia-Agent$の影響を優先する.
-例えば, \wfig{GliaNetworks}の$g_2$の場合, 
-$g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者の経路のみを考えることになる.
+であると仮定し, あるGAが刈り込み指令を下した際に, 
+そのエージェントの$sig$を他のGAに伝達し影響させ過度な刈り込みを抑制させる
+GA同士のネットワーク; グリアネットワークを模倣・実装した.
+グリアネットワーク上において$sig$は伝播距離(ホップ数)に応じて減衰率$A$だけ減衰していく.
+なお, 複数の距離が与えられた場合, 最も近いGAの影響を優先する.
+例えば, \wfig{GliaNetworks}の$G_1$の場合, 
+$G_1\rightarrow G_2\rightarrow G_3\rightarrow G_4$と$G_k\rightarrow G_4$の経路では後者の経路のみを考えることになる.
 \vspace{-5mm}
 \begin{figure}[H]
   \centering
@@ -220,6 +216,11 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
   \label{fig:GliaNetworks}
 \end{figure}
 \vspace{-4mm}
+一般に, $G_i \,,\,(i\in 1,2,3\cdots m)$からの入力をもつグリア$G$の$sig$の更新値は
+以下のようになる.
+\begin{align}
+  sig_{G}=\min(sig_{G_i})-A
+\end{align}
 \section{計算機実験}
 計算機実験として$6\rightarrow 8\rightarrow 8\rightarrow 8\rightarrow 1$の
 5層全結合ニューラルネットワークを用意し, 
@@ -238,7 +239,6 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
       学習率$\eta$&$0.5$\\
       ミニバッチサイズ$miniBatchSize$&$100$\\
       初期抑制信号値$sig$&0.5\\
-      初期シナプス数$Mill$&$182$\\
       減衰率$A$&0.01\\
       チューニングパラメータ$\alpha$&0.01\\
       チューニングパラメータ$\beta$&$6\ln(3)$\\
@@ -258,7 +258,7 @@ $g_0\rightarrow g_1\rightarrow g_2$と$g_0\rightarrow g_2$の経路では後者�
 \begin{figure}[H]
   \centering
   \includegraphics[width=8cm]{Subploting-crop.pdf} 
-  \caption{シナプス量の変化と学習曲線}
+  \caption{シナプス量の変化(上図)と学習曲線(下図)}
   \label{fig:SynapseNum}
 \end{figure}
 \vspace{-2zh}
