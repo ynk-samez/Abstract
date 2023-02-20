@@ -22,7 +22,7 @@
 \titleformat*{\section}{\normalsize\bfseries}
 \titleformat*{\subsection}{\small\bfseries}
 \titleformat*{\subsubsection}{\small\bfseries}
-\renewcommand{\baselinestretch}{1.0}
+\renewcommand{\baselinestretch}{0.9}
 
 \renewcommand{\subfigtopskip}{1pt}	% 図の上の隙間。上図の副題と下図の間。
 \renewcommand{\subfigbottomskip}{0pt} % 図の下の隙間。副題と本題の間。
@@ -109,7 +109,7 @@
 EUの一般データ保護規則をはじめとして世界各国が巨大IT企業を意識した個人情報保護に係る規制を強めており, 
 機械学習における個人情報の扱いは変革が迫られている.
 
-上述した課題を解決すると期待されるのが, 連合学習(Federareted Learning; FL)である. 
+上述した課題を解決すると期待されるのが, 連合学習(Federareted Learning; FL)\cite{DFL}である. 
 連合学習では, 学習データを集約するのではなく, 
 ローカルな学習データを保有する各ノードが, 個々に学習を行い,
 その結果得たパラメータ差分を他のノードと通信し平均化することで大規模な
@@ -168,8 +168,15 @@ EUの一般データ保護規則をはじめとして世界各国が巨大IT企�
 このようなmicrogliaの作用に対し, 
 神経細胞はcytokine, chemokine, 核酸などのシグナル伝達物質を産生することで, 
 能動的にmicrogliaを制御することが知られている. 
-本モデルではこの脳内における細胞間の神経免疫相互作用(Neuroimmune Interaction)を模倣し, 
-Neuro-AgentとGlia-Agent間の相互作用として組み込んだものである. 
+本モデルではこの脳内における細胞間の神経免疫相互作用(Neuroimmune Interaction)を模倣し,
+NAとGAの相互作用として組み込んだものである.
+\vspace{-1.5zh}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{NewDeal-crop.pdf}
+  \caption{Neuro-Glia相互調節機構}
+\end{figure}
+NAとGA間の相互作用として組み込んだものである. 
 以下, 落とし込んだそれぞれのアルゴリズムを説明する.
 \vspace{2mm}
 \subsubsection{GAからNAへの作用\,\,:\,\,刈り込み命令}
@@ -183,8 +190,8 @@ $sig=1.0$に更新し, グリアネットワークへの伝播を行う.
 
 \vspace{2mm}
 \subsubsection{NAからGAへの作用\,\,:\,\,$sig$の更新}
-Neuro-Agentはまず, データ数$miniBatchSize$の間に
-隣接するNeuro-Agentの出力値と比較し, 自分が外れ値であった回数を変数$cnt$にカウントする.
+NAはまず, データ数$miniBatchSize$の間に
+隣接するNAの出力値と比較し, 自分が外れ値であった回数を変数$cnt$にカウントする.
 次に, $cnt$を用いて自身の活動頻度$f$を計算する.
 \begin{align}
   f=\displaystyle\frac{cnt}{miniBatchSize}
@@ -200,7 +207,12 @@ NAのプロパティには$N$の添字を付してある.
 \weq{sig}は, NAの活動頻度$f$が高いほど刈り込みを抑制し, 逆に$f$が小さいほど
 刈り込みがされやすくなるように$sig$を更新する.
 \subsection{グリアネットワークによる過度な刈り込みの抑制}
-我々はこのシステムの在処として, グリア細胞同士のネットワークであるグリアアセンブリ(Glia-Assembly)
+神経免疫疾患の
+グリア細胞は相互に, 情報伝達を行なっている.このグリア同士のネットワークは, 
+グリアアセンブリ(Glia-Assembly)と呼ばれ, 数々の動物実験から
+シナプス形成や脳機能維持に重要な役割を果たしていることが示唆されている. 
+
+我々はこのシステムの在処として, グリア細胞同士のネットワークであるグリアアセンブリ
 であると仮定し, あるGAが刈り込み指令を下した際に, 
 そのエージェントの$sig$を他のGAに伝達し影響させ過度な刈り込みを抑制させる
 GA同士のネットワーク; グリアネットワークを模倣・実装した.
@@ -208,14 +220,14 @@ GA同士のネットワーク; グリアネットワークを模倣・実装し�
 なお, 複数の距離が与えられた場合, 最も近いGAの影響を優先する.
 例えば, \wfig{GliaNetworks}の$G_1$の場合, 
 $G_1\rightarrow G_2\rightarrow G_3\rightarrow G_4$と$G_k\rightarrow G_4$の経路では後者の経路のみを考えることになる.
-\vspace{-5mm}
+\vspace{-1.5zh}
 \begin{figure}[H]
   \centering
   \includegraphics[width=8cm]{GliaNetworks.pdf}
   \caption{グリアネットワークでの$sig$の伝播のあり方}
   \label{fig:GliaNetworks}
 \end{figure}
-\vspace{-4mm}
+\vspace{-2zh}
 一般に, $G_i \,,\,(i\in 1,2,3\cdots m)$からの入力をもつグリア$G$の$sig$の更新値は
 以下のようになる.
 \begin{align}
@@ -263,25 +275,17 @@ $G_1\rightarrow G_2\rightarrow G_3\rightarrow G_4$と$G_k\rightarrow G_4$の経�
 \end{figure}
 \vspace{-2zh}
 
-Glia-Agent及びグリアネットワークによる刈り込みを実行した結果, 最終的なシナプス数は$182$から$72$に推移した. 
-また, この時の学習曲線は刈り込みを行わない場合と比較してほとんど同一の曲線を描き, 
-精度の悪化が認められない.
-従って, 60％のシナプスの削減が精度を維持したまま行われたと評価できる.
+学習誤差率の時間変化を\wfig{SynapseNum}上図に示す。赤丸は刈り込みを行った場合、青丸が刈り込みを行わない場合の結果である。結果からわかるように、刈り込みによる学習率の低下は見られなかった。また、ニューラルネットワークのシナプス数の時間変化を図3.1下図に示す。結果からわかるように約40エポックまでにシナプスが刈り込まれ減少し、その後一定数に収束していることがわかる。これらのシナプス数の減少は指数関数的であり、オーバーシュート型シナプス形成の同様の傾向を示していた。
+具体的には、初期の結合のシナプス数182が、最終的に72まで減少し、約60のシナプスが削減された。実際の刈り込み後のネットワークを\wfig{Graph}に示す.
+赤が正の結合、青が負の結合を表、絶対値が大きいほど太い線で表ている.
+最終結果のネットワークでは、入力層、出力層のニューロン全ての結合は維持されており、中間層において主に刈り込みが生じていることが確認できた。
+以上のことから、提案システムにより、学習精度を維持したままモデルの削減が行えることが確認できた。
 \section{結論}
-神経免疫相互作用に着想を得て全体の管理者のいない
-ニューラルネットワークの学習パラメータの削減を実装し, 
-学習精度を落とさない適切な刈り込みを行うことができた.
-興味深いのはシナプス数の減少曲線が, 生体の脳で行われる
-オーバーシュート型シナプス形成と同様に, 
-指数関数的な減少を見せていることである. 
-曲線のあり方が今後どのように影響するのか, 
-あるいはグリアネットワークの構造が
-曲線にどのように影響するのかなど, 
-各パラメータの在り方については今後の課題とする.
+GAの刈り込み発出確率は、NAの活動量および近隣のGAの刈込み発出により変動するようにした.
+その結果、学習率の精度を低下させることなく約60％のシナプスの削減できることを確認した.
+今後の課題は、刈込み過ぎによる学習精度の劣化を軽減するための方策（人での知見を参考にした刈り込みタイミング）の検討が考えられる。
  \begin{thebibliography}{99}
   \bibitem{DFL} 	
   Roy, Abhijit Guha, et al. "Braintorrent: A peer-to-peer environment for decentralized federated learning." arXiv preprint arXiv:1905.06731 (2019).
-  \bibitem{ADIPS}
-  藤田茂, et al. "分散処理システムのエージェント指向アーキテクチャ." 情報処理学会論文誌 37.5 (1996): 840-852.
 \end{thebibliography}
  \end{document}
