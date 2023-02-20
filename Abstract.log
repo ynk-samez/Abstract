@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  19 FEB 2023 14:32
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  21 FEB 2023 02:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,34 +349,32 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 8.87105pt on input line 86.
 Excluding 'comment' comment.
-File: ./figs//ThisModel.pdf Graphic file (type pdf)
-<./figs//ThisModel.pdf>
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <8> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 128.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 7.68799pt on input line 128.
+(Font)              scaled to size 7.68799pt on input line 130.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <8> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 128.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 7.88538pt on input line 128.
+(Font)              scaled to size 7.88538pt on input line 130.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 5.91403pt on input line 137.
+(Font)              scaled to size 5.91403pt on input line 136.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.92836pt on input line 137.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 137.
+(Font)              scaled to size 4.92836pt on input line 136.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 136.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 137.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 136.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \vbox (badness 1527) has occurred while \output is active []
+Underfull \vbox (badness 1509) has occurred while \output is active []
 
 File: ./figs//NewDeal.pdf Graphic file (type pdf)
 <./figs//NewDeal.pdf>
 
-Overfull \hbox (22.76224pt too wide) in paragraph at lines 172--173
+Overfull \hbox (22.76224pt too wide) in paragraph at lines 171--172
  [][] 
  []
 
@@ -392,12 +390,12 @@ File: ./figs//Subploting-crop.pdf Graphic file (type pdf)
 <./figs//Subploting-crop.pdf>
 [2] (./Abstract.aux) ) 
 Here is how much of TeX's memory you used:
- 4784 strings out of 478724
- 75248 string characters out of 5858391
- 402022 words of memory out of 5000000
- 23134 multiletter control sequences out of 15000+600000
+ 4777 strings out of 478724
+ 75086 string characters out of 5858391
+ 403012 words of memory out of 5000000
+ 23128 multiletter control sequences out of 15000+600000
  482572 words of font info for 84 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  70i,12n,76p,253b,336s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (2 pages, 18004 bytes).
+Output written on Abstract.dvi (2 pages, 18876 bytes).
