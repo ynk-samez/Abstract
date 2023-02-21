@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  21 FEB 2023 16:58
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.euc) (TeX Live 2022) (preloaded format=platex 2022.11.11)  21 FEB 2023 21:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -383,9 +383,6 @@ Overfull \hbox (51.215pt too wide) in paragraph at lines 177--178
  [][] 
  []
 
-
-Underfull \vbox (badness 1253) has occurred while \output is active []
-
 [1
 
 
@@ -398,12 +395,12 @@ File: ./figs//Subploting-crop.pdf Graphic file (type pdf)
 <./figs//Subploting-crop.pdf>
 [2] (./Abstract.aux) ) 
 Here is how much of TeX's memory you used:
- 4780 strings out of 478724
- 75180 string characters out of 5858391
- 403108 words of memory out of 5000000
- 23131 multiletter control sequences out of 15000+600000
+ 4781 strings out of 478724
+ 75187 string characters out of 5858391
+ 403118 words of memory out of 5000000
+ 23132 multiletter control sequences out of 15000+600000
  482572 words of font info for 84 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 70i,12n,76p,524b,334s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 70i,12n,76p,253b,334s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Abstract.dvi (2 pages, 20204 bytes).
+Output written on Abstract.dvi (2 pages, 20712 bytes).
